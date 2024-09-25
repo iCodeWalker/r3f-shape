@@ -42,6 +42,66 @@ frameModelTop.lineTo(2.2, 4);
 frameModelTop.lineTo(0, 4);
 frameModelTop.closePath();
 
+// ############ Floor Model #############
+const flooreModelTop = new THREE.Shape();
+
+flooreModelTop.moveTo(-10, 4);
+flooreModelTop.lineTo(-10, 4.1);
+flooreModelTop.lineTo(10, 4.1);
+flooreModelTop.lineTo(10, 4);
+flooreModelTop.lineTo(-10, 4);
+flooreModelTop.closePath();
+
+// ############ Left Wall Model #############
+const wallModelLeft = new THREE.Shape();
+
+wallModelLeft.moveTo(0, -0.2);
+wallModelLeft.lineTo(0, 11.2);
+wallModelLeft.lineTo(-0.1, 11.2);
+wallModelLeft.lineTo(-0.1, -0.2);
+wallModelLeft.lineTo(0, -0.2);
+wallModelLeft.closePath();
+
+// ############ Right Wall Model #############
+const wallModelRight = new THREE.Shape();
+
+wallModelRight.moveTo(0, -0.2);
+wallModelRight.lineTo(0, 11.2);
+wallModelRight.lineTo(-0.1, 11.2);
+wallModelRight.lineTo(-0.1, -0.2);
+wallModelRight.lineTo(0, -0.2);
+wallModelRight.closePath();
+
+// ############ Back Wall Model #############
+const wallModelBack = new THREE.Shape();
+
+wallModelBack.moveTo(0, 0);
+wallModelBack.lineTo(0, 11.4);
+wallModelBack.lineTo(19.9, 11.4);
+wallModelBack.lineTo(19.9, 0);
+wallModelBack.lineTo(0, 0);
+wallModelBack.closePath();
+
+// ############ front Wall Model #############
+const wallModelfront = new THREE.Shape();
+
+wallModelfront.moveTo(0, 0);
+wallModelfront.lineTo(0, 11.4);
+wallModelfront.lineTo(20, 11.4);
+wallModelfront.lineTo(20, 0);
+wallModelfront.lineTo(0, 0);
+wallModelfront.closePath();
+
+// ############ Ceil Wall Model #############
+const wallModelCeil = new THREE.Shape();
+
+wallModelCeil.moveTo(-10, 4);
+wallModelCeil.lineTo(-10, 4.1);
+wallModelCeil.lineTo(10, 4.1);
+wallModelCeil.lineTo(10, 4);
+wallModelCeil.lineTo(-10, 4);
+wallModelCeil.closePath();
+
 // const designModel2 = new THREE.Shape();
 
 // designModel2.moveTo(0, 1);
@@ -84,6 +144,24 @@ const frameExtrudeSettings = {
   bevelThickness: 0.1,
 };
 
+const floorExtrudeSettings = {
+  depth: 20.1,
+  bevelEnabled: false,
+  bevelSegments: 1,
+  steps: 1,
+  bevelSize: 0.1,
+  bevelThickness: 0.1,
+};
+
+const backWallExtudeSettings = {
+  depth: 0.1,
+  bevelEnabled: false,
+  bevelSegments: 1,
+  steps: 1,
+  bevelSize: 0.1,
+  bevelThickness: 0.1,
+};
+
 const woodColor = new THREE.Color(0xeeeeff);
 const darkWoodColor = new THREE.Color(0xffdbb5);
 
@@ -102,34 +180,27 @@ export default function Experience() {
   return (
     <>
       <Perf position="top-left" />
-
       <OrbitControls makeDefault />
-
       <directionalLight castShadow position={[1, 2, 3]} intensity={1.5} />
       <ambientLight intensity={0.5} />
-
       {/* <mesh castShadow position={[-2, 2, 0]}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
       </mesh> */}
-
       {/* <mesh castShadow position={[2, 2, 0]}>
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
       </mesh> */}
-
       {/*  Left */}
       <mesh position-z={-0.15} position-x={-0.1}>
         <extrudeGeometry args={[frameModelLeft, frameExtrudeSettings]} />
         <meshStandardMaterial color={darkWoodColor} map={woodTexture} />
       </mesh>
-
       {/*  Right */}
       <mesh position-z={-0.15} position-x={2.2}>
         <extrudeGeometry args={[frameModelLeft, frameExtrudeSettings]} />
         <meshStandardMaterial color={darkWoodColor} map={woodTexture} />
       </mesh>
-
       {/*  Top */}
       <mesh position-z={-0.15} position-y={0.1} position-x={-0.1}>
         <extrudeGeometry args={[frameModelTop, frameExtrudeSettings]} />
@@ -140,40 +211,65 @@ export default function Experience() {
         <extrudeGeometry args={[frameModelTop, frameExtrudeSettings]} />
         <meshStandardMaterial color={darkWoodColor} map={woodTexture} />
       </mesh>
+      {/* Floor */}
+      <mesh position-z={0} position-y={-4.3} position-x={0} rotateY={0}>
+        <extrudeGeometry args={[flooreModelTop, floorExtrudeSettings]} />
+        <meshStandardMaterial color={"red"} map={woodTexture} />
+      </mesh>
+      {/* Left Wall */}
+      <mesh position-z={0} position-y={0} position-x={-9.9} rotateY={0}>
+        <extrudeGeometry args={[wallModelLeft, floorExtrudeSettings]} />
+        <meshStandardMaterial color={"red"} map={woodTexture} />
+      </mesh>
+      {/* Right Wall */}
+      <mesh position-z={0} position-y={0} position-x={10} rotateY={0}>
+        <extrudeGeometry args={[wallModelRight, floorExtrudeSettings]} />
+        <meshStandardMaterial color={"red"} map={woodTexture} />
+      </mesh>
+      {/* Back Wall */}
+      <mesh position-z={0} position-y={-0.2} position-x={-9.9} rotateY={0}>
+        <extrudeGeometry args={[wallModelBack, backWallExtudeSettings]} />
+        <meshStandardMaterial color={"red"} map={woodTexture} />
+      </mesh>
+      {/* front Wall */}
+      <mesh position-z={20} position-y={-0.2} position-x={-10} rotateY={0}>
+        <extrudeGeometry args={[wallModelfront, backWallExtudeSettings]} />
+        <meshStandardMaterial color={"red"} map={woodTexture} />
+      </mesh>
+
+      {/* Ceiling */}
+      <mesh position-z={0} position-y={7.1} position-x={0} rotateY={0}>
+        <extrudeGeometry args={[wallModelCeil, floorExtrudeSettings]} />
+        <meshStandardMaterial color={"red"} map={woodTexture} />
+      </mesh>
       <mesh>
         <extrudeGeometry args={[doorModel, extrudeSettings]} />
         <meshStandardMaterial map={woodTexture} />
       </mesh>
-
       <mesh position-z={-0.05} position-x={0.3}>
         <extrudeGeometry args={[designModel1, extrudeSettings2]} />
         <meshBasicMaterial color={woodColor} map={woodTexture} />
       </mesh>
-
       <mesh position-z={-0.05} position-x={1.3}>
         <extrudeGeometry args={[designModel1, extrudeSettings2]} />
         <meshBasicMaterial color={woodColor} map={woodTexture} />
       </mesh>
-
       <mesh position-z={-0.05} position-x={0.3} position-y={2}>
         <extrudeGeometry args={[designModel1, extrudeSettings2]} />
         <meshBasicMaterial color={woodColor} map={woodTexture} />
       </mesh>
-
       <mesh position-z={-0.05} position-x={1.3} position-y={2}>
         <extrudeGeometry args={[designModel1, extrudeSettings2]} />
         <meshBasicMaterial color={woodColor} map={woodTexture} />
       </mesh>
-
       {/* <mesh position-z={-0.05} position-x={0.4} position-y={3}>
         <extrudeGeometry args={[designModel2, extrudeSettings2]} />
         <meshStandardMaterial color={"red"} />
       </mesh> */}
-
-      <mesh receiveShadow position-y={-1.25}>
+      {/* <mesh receiveShadow position-y={-1.25}>
         <boxGeometry args={[10, 0.5, 10]} />
         <meshStandardMaterial color="greenyellow" />
-      </mesh>
+      </mesh> */}
     </>
   );
 }
