@@ -12,6 +12,8 @@ const FloorModel = ({
   tileWidth = 1,
 }) => {
   const [meshes, setMeshes] = useState([]);
+  const [meshesLength, setMeshesLength] = useState([]);
+
   const tileTexture = useLoader(THREE.TextureLoader, "tile.jpg");
   const woodTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
@@ -79,7 +81,7 @@ const FloorModel = ({
     bevelThickness: 0.1,
   };
 
-  const tileMeshes = () => {
+  const tileMeshes = (zPosition) => {
     const meshes1 = [];
 
     let loopVar = width;
@@ -96,7 +98,11 @@ const FloorModel = ({
         <group>
           {/* tile gap */}
           {i == 5 && (
-            <mesh position-z={0} position-y={-0.3} position-x={-i - 1.0001}>
+            <mesh
+              position-z={zPosition}
+              position-y={-0.3}
+              position-x={-i - 1.0001}
+            >
               {console.log(i, "datadata---i")}
 
               <extrudeGeometry
@@ -105,7 +111,7 @@ const FloorModel = ({
               <meshStandardMaterial color={"purple"} map={tileTexture} />
             </mesh>
           )}
-          <mesh position-z={0} position-y={-0.3} position-x={i}>
+          <mesh position-z={zPosition} position-y={-0.3} position-x={i}>
             <extrudeGeometry
               args={[floorTileModel, floorTileExtrudeSettings]}
             />
@@ -114,7 +120,11 @@ const FloorModel = ({
 
           {/* tile gap */}
           {
-            <mesh position-z={0} position-y={-0.3} position-x={i + 1.0001}>
+            <mesh
+              position-z={zPosition}
+              position-y={-0.3}
+              position-x={i + 1.0001}
+            >
               <extrudeGeometry
                 args={[floorTileGapModel, floorTileGapExtrudeSettings]}
               />
@@ -135,10 +145,33 @@ const FloorModel = ({
     return meshes1;
   };
 
+  // ######################### Length #########################
+
+  const tileMeshesLength = () => {
+    const meshes1 = [];
+
+    let loopVar = length;
+    let a = loopVar;
+    // console.log(loopVar, "datadata");
+    for (let i = 0; i < a - 1; i++) {
+      console.log(i, "datadata");
+      //   if (i % 2 === 0) {
+      //     continue;
+      //   }
+      console.log(i, a, "datadata");
+
+      meshes1.push(tileMeshes(i));
+    }
+    return meshes1;
+  };
+
   useEffect(() => {
     let data = tileMeshes();
     console.log(data, "datadata");
+
+    let data2 = tileMeshesLength();
     setMeshes(data);
+    setMeshesLength(data2);
   }, []);
 
   console.log(meshes, "meshes");
@@ -158,6 +191,7 @@ const FloorModel = ({
       </mesh> */}
       {/* {tileMeshes()} */}
       {meshes}
+      {meshesLength}
     </>
   );
 };
