@@ -59,19 +59,60 @@ const FloorModel = ({
     bevelThickness: 0.1,
   };
 
+  // ############ Floor tile gap Model #############
+  const floorTileGapModel = new THREE.Shape();
+  floorTileGapModel.moveTo(-0.01, 0);
+  floorTileGapModel.lineTo(-0.01, 0.1);
+  floorTileGapModel.lineTo(0.01, 0.1);
+  floorTileGapModel.lineTo(0.01, 0);
+  floorTileGapModel.lineTo(-0.01, 0);
+  floorTileGapModel.closePath();
+
+  // ############ Floor Extrude gap Setting  #############
+  const floorTileGapExtrudeSettings = {
+    depth: tileLength * 2,
+    bevelEnabled: false,
+    bevelSegments: 1,
+    steps: 1,
+    bevelSize: 0.1,
+    bevelThickness: 0.1,
+  };
+
   const tileMeshes = () => {
     const meshes1 = [];
 
-    let loopVar = width / 2;
+    let loopVar = width;
     // console.log(loopVar, "datadata");
     for (let i = -(loopVar / 2); i < loopVar / 2; i++) {
       console.log(i, "datadata");
+      if (i % 2 === 0) {
+        continue;
+      }
 
       meshes1.push(
-        <mesh position-z={0} position-y={-0.3} position-x={i}>
-          <extrudeGeometry args={[floorTileModel, floorTileExtrudeSettings]} />
-          <meshStandardMaterial map={tileTexture} />
-        </mesh>
+        <group>
+          {/* tile gap */}
+          <mesh position-z={0} position-y={-0.3} position-x={-i - 1.01}>
+            <extrudeGeometry
+              args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+            />
+            <meshStandardMaterial color={"red"} map={tileTexture} />
+          </mesh>
+          <mesh position-z={0} position-y={-0.3} position-x={i}>
+            <extrudeGeometry
+              args={[floorTileModel, floorTileExtrudeSettings]}
+            />
+            <meshStandardMaterial map={tileTexture} />
+          </mesh>
+
+          {/* tile gap */}
+          {/* <mesh position-z={0} position-y={-0.3} position-x={i + 1.01}>
+            <extrudeGeometry
+              args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+            />
+            <meshStandardMaterial color={"red"} map={tileTexture} />
+          </mesh> */}
+        </group>
       );
     }
     return meshes1;
@@ -99,7 +140,51 @@ const FloorModel = ({
         <meshStandardMaterial map={tileTexture} />
       </mesh> */}
       {/* {tileMeshes()} */}
-      {meshes}
+      {/* {meshes} */}
+
+      <group>
+        {/* tile gap */}
+        <mesh position-z={0} position-y={-0.3} position-x={-1.01}>
+          <extrudeGeometry
+            args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+          />
+          <meshStandardMaterial color={"red"} map={tileTexture} />
+        </mesh>
+        <mesh position-z={0} position-y={-0.3} position-x={0}>
+          <extrudeGeometry args={[floorTileModel, floorTileExtrudeSettings]} />
+          <meshStandardMaterial map={tileTexture} />
+        </mesh>
+
+        {/* tile gap */}
+        <mesh position-z={0} position-y={-0.3} position-x={1.01}>
+          <extrudeGeometry
+            args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+          />
+          <meshStandardMaterial color={"red"} map={tileTexture} />
+        </mesh>
+      </group>
+
+      <group>
+        {/* tile gap */}
+        <mesh position-z={0} position-y={-0.3} position-x={1.02}>
+          <extrudeGeometry
+            args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+          />
+          <meshStandardMaterial color={"red"} map={tileTexture} />
+        </mesh>
+        <mesh position-z={0} position-y={-0.3} position-x={2.03}>
+          <extrudeGeometry args={[floorTileModel, floorTileExtrudeSettings]} />
+          <meshStandardMaterial map={tileTexture} />
+        </mesh>
+
+        {/* tile gap */}
+        <mesh position-z={0} position-y={-0.3} position-x={3.04}>
+          <extrudeGeometry
+            args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+          />
+          <meshStandardMaterial color={"red"} map={tileTexture} />
+        </mesh>
+      </group>
     </>
   );
 };
