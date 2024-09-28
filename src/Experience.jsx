@@ -3,6 +3,7 @@ import { useLoader } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+import FloorModel from "./models/floorModel/floorModel";
 
 const doorModel = new THREE.Shape();
 
@@ -212,36 +213,37 @@ export default function Experience() {
         <meshStandardMaterial color={darkWoodColor} map={woodTexture} />
       </mesh>
       {/* Floor */}
-      <mesh position-z={0} position-y={-4.3} position-x={0} rotateY={0}>
+      {/* <mesh position-z={0} position-y={-4.3} position-x={0} rotateY={0}>
         <extrudeGeometry args={[flooreModelTop, floorExtrudeSettings]} />
         <meshStandardMaterial color={"red"} map={woodTexture} />
-      </mesh>
+      </mesh> */}
+      <FloorModel length={12} width={12} />
       {/* Left Wall */}
-      <mesh position-z={0} position-y={0} position-x={-9.9} rotateY={0}>
+      {/* <mesh position-z={0} position-y={0} position-x={-9.9} rotateY={0}>
         <extrudeGeometry args={[wallModelLeft, floorExtrudeSettings]} />
         <meshStandardMaterial color={"red"} map={woodTexture} />
-      </mesh>
+      </mesh> */}
       {/* Right Wall */}
-      <mesh position-z={0} position-y={0} position-x={10} rotateY={0}>
+      {/* <mesh position-z={0} position-y={0} position-x={10} rotateY={0}>
         <extrudeGeometry args={[wallModelRight, floorExtrudeSettings]} />
         <meshStandardMaterial color={"red"} map={woodTexture} />
-      </mesh>
+      </mesh> */}
       {/* Back Wall */}
-      <mesh position-z={0} position-y={-0.2} position-x={-9.9} rotateY={0}>
+      {/* <mesh position-z={0} position-y={-0.2} position-x={-9.9} rotateY={0}>
         <extrudeGeometry args={[wallModelBack, backWallExtudeSettings]} />
         <meshStandardMaterial color={"red"} map={woodTexture} />
-      </mesh>
+      </mesh> */}
       {/* front Wall */}
-      <mesh position-z={20} position-y={-0.2} position-x={-10} rotateY={0}>
+      {/* <mesh position-z={20} position-y={-0.2} position-x={-10} rotateY={0}>
         <extrudeGeometry args={[wallModelfront, backWallExtudeSettings]} />
         <meshStandardMaterial color={"red"} map={woodTexture} />
-      </mesh>
+      </mesh> */}
 
       {/* Ceiling */}
-      <mesh position-z={0} position-y={7.1} position-x={0} rotateY={0}>
+      {/* <mesh position-z={0} position-y={7.1} position-x={0} rotateY={0}>
         <extrudeGeometry args={[wallModelCeil, floorExtrudeSettings]} />
         <meshStandardMaterial color={"red"} map={woodTexture} />
-      </mesh>
+      </mesh> */}
       <mesh>
         <extrudeGeometry args={[doorModel, extrudeSettings]} />
         <meshStandardMaterial map={woodTexture} />
