@@ -4,6 +4,7 @@ import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import FloorModel from "./models/floorModel/floorModel";
+import FourByTwo from "./models/floorModel/fourbytwo";
 
 const doorModel = new THREE.Shape();
 
@@ -193,7 +194,8 @@ export default function Experience() {
         <meshStandardMaterial color="mediumpurple" />
       </mesh> */}
       {/*  Left */}
-      <FloorModel length={14} width={14} />
+      {/* <FloorModel length={14} width={14} /> */}
+      <FourByTwo length={16} width={16} />
     </>
   );
 }
