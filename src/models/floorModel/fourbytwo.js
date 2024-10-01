@@ -8,8 +8,8 @@ import * as THREE from "three";
 const FourByTwo = ({
   length = 1,
   width = 1,
-  tileLength = 1,
-  tileWidth = 2,
+  tileLength = 2,
+  tileWidth = 4,
 }) => {
   const [meshes, setMeshes] = useState([]);
   const [meshesLength, setMeshesLength] = useState([]);
@@ -17,7 +17,7 @@ const FourByTwo = ({
   const tileTexture = useLoader(THREE.TextureLoader, "tile.jpg");
   const woodTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
-  const tileGapColor = new THREE.Color(0xff0000);
+  const tileGapColor = new THREE.Color(0xf1f3c2);
   // 0xf1f3c2
 
   tileTexture.wrapS = THREE.RepeatWrapping;
@@ -37,7 +37,7 @@ const FourByTwo = ({
 
   // ############ Floor Extrude Setting  #############
   const floorExtrudeSettings = {
-    depth: -length,
+    depth: -length * 2,
     bevelEnabled: false,
     bevelSegments: 1,
     steps: 1,
@@ -47,17 +47,25 @@ const FourByTwo = ({
 
   // ############ Floor tile Model #############
   // Subtracted gap value from tile size = tileWidth - 0.01
+  //   const floorTileModel = new THREE.Shape();
+  //   floorTileModel.moveTo(-(tileWidth / 2 - 0.005), 0);
+  //   floorTileModel.lineTo(-(tileWidth / 2 - 0.005), 0.1);
+  //   floorTileModel.lineTo(tileWidth / 2 - 0.005, 0.1);
+  //   floorTileModel.lineTo(tileWidth / 2 - 0.005, 0);
+  //   floorTileModel.lineTo(-(tileWidth / 2 - 0.005), 0);
+  //   floorTileModel.closePath();
+
   const floorTileModel = new THREE.Shape();
-  floorTileModel.moveTo(-(tileWidth - 0.005), 0);
-  floorTileModel.lineTo(-(tileWidth - 0.005), 0.1);
-  floorTileModel.lineTo(tileWidth - 0.005, 0.1);
-  floorTileModel.lineTo(tileWidth - 0.005, 0);
-  floorTileModel.lineTo(-(tileWidth - 0.005), 0);
-  floorTileModel.closePath();
+  floorTileModel.moveTo(-(tileWidth - 0.01), 0); // Start point
+  floorTileModel.lineTo(-(tileWidth - 0.01), 0.1); // Top left
+  floorTileModel.lineTo(tileWidth - 0.01, 0.1); // Top right
+  floorTileModel.lineTo(tileWidth - 0.01, 0); // Bottom right
+  floorTileModel.lineTo(-(tileWidth - 0.01), 0); // Back to the start point
+  floorTileModel.closePath(); // Close the path
 
   // ############ Floor Extrude Setting  #############
   const floorTileExtrudeSettings = {
-    depth: -2 * 2,
+    depth: -tileLength,
     bevelEnabled: false,
     bevelSegments: 0,
     steps: 1,
@@ -67,11 +75,11 @@ const FourByTwo = ({
 
   // ############ Floor tile gap Model #############
   const floorTileGapModel = new THREE.Shape();
-  floorTileGapModel.moveTo(-0.005, 0);
-  floorTileGapModel.lineTo(-0.005, 0.101);
-  floorTileGapModel.lineTo(0.005, 0.101);
-  floorTileGapModel.lineTo(0.005, 0);
-  floorTileGapModel.lineTo(-0.005, 0);
+  floorTileGapModel.moveTo(-0.01, 0);
+  floorTileGapModel.lineTo(-0.01, 0.101);
+  floorTileGapModel.lineTo(0.01, 0.101);
+  floorTileGapModel.lineTo(0.01, 0);
+  floorTileGapModel.lineTo(-0.01, 0);
   floorTileGapModel.closePath();
 
   // ############ Floor tile gap Model #############
@@ -85,7 +93,7 @@ const FourByTwo = ({
 
   // ############ Floor Extrude gap Setting  #############
   const floorTileGapExtrudeSettings = {
-    depth: tileLength * 2 + 0.005,
+    depth: -length,
     bevelEnabled: false,
     bevelSegments: 1,
     steps: 1,
@@ -95,7 +103,7 @@ const FourByTwo = ({
 
   // ############## Top exturde setting ###############
   const floorTileTopGapExtrudeSettings = {
-    depth: tileLength * 2,
+    depth: -width / 4 + 1,
     bevelEnabled: false,
     bevelSegments: 1,
     steps: 1,
@@ -107,46 +115,41 @@ const FourByTwo = ({
     const meshes1 = [];
     console.log(width, "datadata");
 
-    let loopVar = width;
-    let a = loopVar / 2;
+    let a = width / 2;
     // console.log(loopVar, "datadata");
 
-    for (let i = -2; i <= 2; i++) {
-      if (i % 4 === 0) {
+    for (let i = -a; i <= a - 4; i++) {
+      if (i % tileWidth !== 0) {
         continue;
       }
-      console.log(i, a, "datadata");
-
+      console.log(i, a, "tileGapColor");
       meshes1.push(
         <group>
           {/* left tile gap */}
-          {/* <mesh
-            position-z={-zPosition - 2.01}
-            position-y={0.101}
-            position-x={i - 1.0001}
-          >
+          {/* <mesh position-z={-4} position-y={0.101} position-x={i - 1.0001}>
             <extrudeGeometry
               args={[floorTileGapModel, floorTileGapExtrudeSettings]}
             />
             <meshStandardMaterial color={tileGapColor} map={tileTexture} />
           </mesh> */}
           {/*front tile gap */}
-          {/* <mesh
-            position-z={-zPosition - 0.0051}
-            position-y={0.1005}
-            position-x={i - 1.0}
-            rotation={[0, Math.PI / 2, 0]}
-          >
-
-            <extrudeGeometry
-              args={[floorTileGapModel, floorTileTopGapExtrudeSettings]}
-            />
-            <meshStandardMaterial color={tileGapColor} map={tileTexture} />
-          </mesh> */}
+          {/* {i != a && (
+            <mesh
+              position-z={0}
+              position-y={0.1005}
+              position-x={i}
+              rotation={[0, -Math.PI / 2, 0]}
+            >
+              <extrudeGeometry
+                args={[floorTileGapModel, floorTileTopGapExtrudeSettings]}
+              />
+              <meshStandardMaterial color={tileGapColor} map={tileTexture} />
+            </mesh>
+          )} */}
 
           {/* Main tile */}
-
-          <mesh position-z={0} position-y={0.101} position-x={i}>
+          {console.log(i, "tileGapColor")}
+          <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
             <extrudeGeometry
               args={[floorTileModel, floorTileExtrudeSettings]}
             />
@@ -154,44 +157,78 @@ const FourByTwo = ({
               //   color={"green"}
               map={tileTexture}
               side={THREE.DoubleSide}
-              wireframe
             />
           </mesh>
 
           {/* right tile gap */}
+          <mesh position-z={-0.001} position-y={0.102} position-x={i}>
+            {console.log(i, "datadata----mesh---x")}
 
-          {i == a - 1 && (
-            <></>
-            // <mesh
-            //   position-z={-zPosition - 2.021}
-            //   position-y={0.101}
-            //   position-x={i + 1.0001}
-            // >
-            //   <extrudeGeometry
-            //     args={[floorTileGapModel, floorTileGapExtrudeSettings]}
-            //   />
-            //   <meshStandardMaterial color={tileGapColor} map={tileTexture} />
-            // </mesh>
-          )}
+            <extrudeGeometry
+              args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+            />
+            <meshStandardMaterial
+              color={"red"}
+              map={tileTexture}
+              side={THREE.DoubleSide}
+            />
+          </mesh>
 
           {/*back tile gap */}
-          {i == len && (
-            <></>
-            // <mesh
-            //   position-z={-zPosition - 2.0152}
-            //   position-y={0.101}
-            //   position-x={i - 1.0}
-            //   rotation={[0, Math.PI / 2, 0]}
-            // >
-            //   <extrudeGeometry
-            //     args={[floorTileGapModel, floorTileTopGapExtrudeSettings]}
-            //   />
-            //   <meshStandardMaterial color={"red"} map={tileTexture} />
-            // </mesh>
-          )}
+
+          <></>
+          <mesh
+            position-z={-zPosition - 0.02}
+            position-y={0.102}
+            position-x={i - tileWidth}
+            rotation={[0, -Math.PI / 2, 0]}
+          >
+            <extrudeGeometry
+              args={[floorTileGapModel, floorTileTopGapExtrudeSettings]}
+            />
+            <meshStandardMaterial
+              color={"red"}
+              map={tileTexture}
+              side={THREE.DoubleSide}
+            />
+          </mesh>
         </group>
       );
     }
+
+    // Sides frame
+    const rightframe = (
+      <mesh position-z={-0.001} position-y={0.3} position-x={width / 2}>
+        <extrudeGeometry
+          args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+        />
+        <meshStandardMaterial
+          color={tileGapColor}
+          map={tileTexture}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+    );
+    meshes1.push(rightframe);
+
+    const leftframe = (
+      <mesh
+        position-z={-0.001}
+        position-y={0.3}
+        position-x={-width / 2 - 0.01 * (width / 4)}
+      >
+        <extrudeGeometry
+          args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+        />
+        <meshStandardMaterial
+          color={tileGapColor}
+          map={tileTexture}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+    );
+    meshes1.push(leftframe);
+
     return meshes1;
   };
 
@@ -205,7 +242,7 @@ const FourByTwo = ({
     // console.log(loopVar, "datadata");
     for (let i = 0; i < a; i++) {
       console.log(i, "datadata");
-      if (i % 2 === 0) {
+      if (i % tileLength !== 0) {
         continue;
       }
       console.log(i, a, "datadata");
