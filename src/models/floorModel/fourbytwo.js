@@ -8,8 +8,8 @@ import * as THREE from "three";
 const FourByTwo = ({
   length = 1,
   width = 1,
-  tileLength = 2,
-  tileWidth = 4,
+  tileLength = 1,
+  tileWidth = 2,
 }) => {
   const [meshes, setMeshes] = useState([]);
   const [meshesLength, setMeshesLength] = useState([]);
@@ -133,7 +133,10 @@ const FourByTwo = ({
 
   let backMesh = [];
   for (let i = 0; i < length; i++) {
-    if (i % 2 == 0) {
+    if (i % 1 == 0 && tileLength == 1) {
+      backMesh.push(backGapTile(i));
+    }
+    if (i % 2 == 0 && (tileLength == 2 || tileLength == 4)) {
       backMesh.push(backGapTile(i));
     }
   }
