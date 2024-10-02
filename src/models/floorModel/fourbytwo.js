@@ -8,8 +8,8 @@ import * as THREE from "three";
 const FourByTwo = ({
   length = 1,
   width = 1,
-  tileLength = 1,
-  tileWidth = 2,
+  tileLength = 2,
+  tileWidth = 4,
 }) => {
   const [meshes, setMeshes] = useState([]);
   const [meshesLength, setMeshesLength] = useState([]);
@@ -56,12 +56,26 @@ const FourByTwo = ({
   //   floorTileModel.closePath();
 
   const floorTileModel = new THREE.Shape();
-  floorTileModel.moveTo(-(tileWidth - 0.01), 0); // Start point
-  floorTileModel.lineTo(-(tileWidth - 0.01), 0.1); // Top left
+  floorTileModel.moveTo(-0 - 0.01, 0); // Start point
+  floorTileModel.lineTo(-0 - 0.01, 0.1); // Top left
   floorTileModel.lineTo(tileWidth - 0.01, 0.1); // Top right
   floorTileModel.lineTo(tileWidth - 0.01, 0); // Bottom right
-  floorTileModel.lineTo(-(tileWidth - 0.01), 0); // Back to the start point
+  floorTileModel.lineTo(0 - 0.01, 0); // Back to the start point
   floorTileModel.closePath(); // Close the path
+
+  // Last tile model
+  const floorLastTileModel = (x) => {
+    console.log(x, "floorLastTileModel");
+    const floorLastTileModel = new THREE.Shape();
+    floorLastTileModel.moveTo(0 - 0.01, 0); // Start point
+    floorLastTileModel.lineTo(0 - 0.01, 0.1); // Top left
+    floorLastTileModel.lineTo(2 - 0.01, 0.1); // Top right
+    floorLastTileModel.lineTo(2 - 0.01, 0); // Bottom right
+    floorLastTileModel.lineTo(0 - 0.01, 0); // Back to the start point
+    floorLastTileModel.closePath(); // Close the path
+
+    return floorLastTileModel;
+  };
 
   // ############ Floor Extrude Setting  #############
   const floorTileExtrudeSettings = {
@@ -116,7 +130,7 @@ const FourByTwo = ({
       <mesh
         position-z={-zPosition}
         position-y={0.102}
-        position-x={-tileWidth}
+        position-x={tileWidth}
         rotation={[0, -Math.PI / 2, 0]}
       >
         <extrudeGeometry
@@ -147,12 +161,20 @@ const FourByTwo = ({
 
     let a = width / 2;
     // console.log(loopVar, "datadata");
-
-    for (let i = 0; i < width - tileWidth; i++) {
+    let coordinates = [0, 4, 8, 12, 16];
+    for (let i = 0; i <= width; i++) {
       if (i % tileWidth !== 0) {
         continue;
       }
-      console.log(i, a, "tileGapColor");
+
+      //   coordinates.push(i);
+      // }
+
+      // for (let i = 0; i < width - tileWidth; i++) {
+
+      let lastCordinate = coordinates[coordinates.length - 1];
+      console.log(coordinates, lastCordinate, "floorTileModel");
+
       meshes1.push(
         <group>
           {/* left tile gap */}
@@ -184,8 +206,8 @@ const FourByTwo = ({
           )} */}
 
           {/* Main tile */}
-          {console.log(i, "tileGapColor")}
-          <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
+          {console.log(i, "roightTile")}
+          {/* <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
             <extrudeGeometry
               args={[floorTileModel, floorTileExtrudeSettings]}
             />
@@ -194,10 +216,52 @@ const FourByTwo = ({
               map={tileTexture}
               side={THREE.DoubleSide}
             />
-          </mesh>
+          </mesh> */}
+          {i == lastCordinate ? (
+            <mesh
+              position-z={-zPosition}
+              position-y={1}
+              position-x={i + tileWidth}
+            >
+              {console.log("floorLastTileModel", i, lastCordinate, width)}
+              <extrudeGeometry
+                args={[
+                  floorLastTileModel(width - lastCordinate),
+                  floorTileExtrudeSettings,
+                ]}
+              />
+              <meshStandardMaterial
+                color={"green"}
+                map={tileTexture}
+                side={THREE.DoubleSide}
+              />
+            </mesh>
+          ) : (
+            <mesh
+              position-z={-zPosition}
+              position-y={0.101}
+              position-x={i + tileWidth}
+            >
+              {console.log("roightTile------", i)}
+
+              <extrudeGeometry
+                args={[floorTileModel, floorTileExtrudeSettings]}
+              />
+              <meshStandardMaterial
+                //   color={"green"}
+                map={tileTexture}
+                side={THREE.DoubleSide}
+              />
+            </mesh>
+          )}
 
           {/* right tile gap */}
-          <mesh position-z={-0.001} position-y={0.102} position-x={i}>
+          <mesh
+            position-z={-0.001}
+            position-y={0.102}
+            position-x={i + tileWidth}
+          >
+            {console.log(i, "roightTile")}
             <extrudeGeometry
               args={[floorTileGapModel, floorTileGapExtrudeSettings]}
             />
