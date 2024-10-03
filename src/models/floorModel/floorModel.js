@@ -10,20 +10,17 @@ const FloorModel = ({
   width = 1,
   tileLength = 2,
   tileWidth = 2,
+  gapColor = 0xf1f3c2,
+  texture,
 }) => {
   const [tilesData, setTilesData] = useState([]);
 
-  const tileTexture = useLoader(THREE.TextureLoader, "tile.jpg");
-  const woodTexture = useLoader(THREE.TextureLoader, "wood.jpg");
+  const tileTexture = useLoader(THREE.TextureLoader, texture);
+  const tileGapColor = new THREE.Color(gapColor);
 
-  const tileGapColor = new THREE.Color(0xf1f3c2);
-  // 0xf1f3c2
-
+  // ################### Repeating Tile Texture ###################
   tileTexture.wrapS = THREE.RepeatWrapping;
   tileTexture.wrapT = THREE.RepeatWrapping;
-
-  woodTexture.wrapS = THREE.RepeatWrapping;
-  woodTexture.wrapT = THREE.RepeatWrapping;
 
   // ################### Floor Tile Model ###################
   // Subtracted tile gap value from tile size = tileWidth - 0.01
@@ -150,7 +147,6 @@ const FloorModel = ({
               position-y={0.101}
               position-x={i + tileWidth}
             >
-              {console.log("floorLastTileModel", i, lastCordinate, width)}
               <extrudeGeometry
                 args={[
                   floorLastTileModel(width - lastCordinate),
@@ -165,8 +161,6 @@ const FloorModel = ({
               position-y={0.101}
               position-x={i + tileWidth}
             >
-              {console.log("roightTile------", i)}
-
               <extrudeGeometry
                 args={[floorTileModel, floorTileExtrudeSettings]}
               />
@@ -184,7 +178,6 @@ const FloorModel = ({
             position-y={0.102}
             position-x={i + tileWidth - 0.01}
           >
-            {console.log(i, "roightTile")}
             <extrudeGeometry
               args={[floorTileGapModel, floorTileGapExtrudeSettings]}
             />
@@ -218,7 +211,7 @@ const FloorModel = ({
   useEffect(() => {
     let tilesData = verticalTileMesh();
     setTilesData([...tilesData, ...horizontalTileGapData]);
-  }, [length, width, tileLength, tileWidth]);
+  }, [length, width, tileLength, tileWidth, gapColor]);
 
   return (
     <>

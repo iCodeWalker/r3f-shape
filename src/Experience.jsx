@@ -195,7 +195,14 @@ export default function Experience() {
       </mesh> */}
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
-      <FloorModel length={14} width={19} tileLength={2} tileWidth={2} />
+      <FloorModel
+        length={14}
+        width={19}
+        tileLength={2}
+        tileWidth={2}
+        gapColor={0xf1f39c}
+        texture={"tile.jpg"}
+      />
     </>
   );
 }
