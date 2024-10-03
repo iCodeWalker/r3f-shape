@@ -195,7 +195,7 @@ export default function Experience() {
       </mesh> */}
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
-      <FourByTwo length={14} width={19} />
+      <FloorModel length={14} width={19} tileLength={2} tileWidth={2} />
     </>
   );
 }
