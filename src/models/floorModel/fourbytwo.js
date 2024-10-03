@@ -69,8 +69,8 @@ const FourByTwo = ({
     const floorLastTileModel = new THREE.Shape();
     floorLastTileModel.moveTo(0 - 0.01, 0); // Start point
     floorLastTileModel.lineTo(0 - 0.01, 0.1); // Top left
-    floorLastTileModel.lineTo(2 - 0.01, 0.1); // Top right
-    floorLastTileModel.lineTo(2 - 0.01, 0); // Bottom right
+    floorLastTileModel.lineTo(x - 0.01, 0.1); // Top right
+    floorLastTileModel.lineTo(x - 0.01, 0); // Bottom right
     floorLastTileModel.lineTo(0 - 0.01, 0); // Back to the start point
     floorLastTileModel.closePath(); // Close the path
 
@@ -137,7 +137,7 @@ const FourByTwo = ({
           args={[floorTileGapModel, floorTileTopGapExtrudeSettings]}
         />
         <meshStandardMaterial
-          color={"blue"}
+          color={tileGapColor}
           map={tileTexture}
           side={THREE.DoubleSide}
         />
@@ -154,6 +154,14 @@ const FourByTwo = ({
       backMesh.push(backGapTile(i));
     }
   }
+  let coordinates = [];
+  for (let i = 0; i <= width; i++) {
+    if (i % tileWidth !== 0) {
+      continue;
+    }
+    console.log(i, "coordinatescoordinates");
+    coordinates.push(i);
+  }
 
   const tileMeshes = (zPosition, len) => {
     const meshes1 = [];
@@ -161,7 +169,7 @@ const FourByTwo = ({
 
     let a = width / 2;
     // console.log(loopVar, "datadata");
-    let coordinates = [0, 4, 8, 12, 16];
+
     for (let i = 0; i <= width; i++) {
       if (i % tileWidth !== 0) {
         continue;
@@ -220,7 +228,7 @@ const FourByTwo = ({
           {i == lastCordinate ? (
             <mesh
               position-z={-zPosition}
-              position-y={1}
+              position-y={0.101}
               position-x={i + tileWidth}
             >
               {console.log("floorLastTileModel", i, lastCordinate, width)}
@@ -231,7 +239,7 @@ const FourByTwo = ({
                 ]}
               />
               <meshStandardMaterial
-                color={"green"}
+                // color={tileGapColor}
                 map={tileTexture}
                 side={THREE.DoubleSide}
               />
@@ -248,7 +256,7 @@ const FourByTwo = ({
                 args={[floorTileModel, floorTileExtrudeSettings]}
               />
               <meshStandardMaterial
-                //   color={"green"}
+                // color={tileGapColor}
                 map={tileTexture}
                 side={THREE.DoubleSide}
               />
@@ -259,14 +267,14 @@ const FourByTwo = ({
           <mesh
             position-z={-0.001}
             position-y={0.102}
-            position-x={i + tileWidth}
+            position-x={i + tileWidth - 0.01}
           >
             {console.log(i, "roightTile")}
             <extrudeGeometry
               args={[floorTileGapModel, floorTileGapExtrudeSettings]}
             />
             <meshStandardMaterial
-              color={"red"}
+              color={tileGapColor}
               map={tileTexture}
               side={THREE.DoubleSide}
             />

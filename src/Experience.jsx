@@ -182,8 +182,8 @@ export default function Experience() {
   return (
     <>
       <Perf position="top-left" />
-      <OrbitControls makeDefault target={[1, 1, -4]} />
-      <directionalLight castShadow position={[1, 2, 3]} intensity={2.5} />
+      <OrbitControls makeDefault target={[10, 1, -5]} />
+      <directionalLight castShadow position={[6, 4, 1]} intensity={3} />
       <ambientLight intensity={0.5} />
       {/* <mesh castShadow position={[-2, 2, 0]}>
         <sphereGeometry />
@@ -195,7 +195,7 @@ export default function Experience() {
       </mesh> */}
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
-      <FourByTwo length={14} width={18} />
+      <FourByTwo length={14} width={19} />
     </>
   );
 }
