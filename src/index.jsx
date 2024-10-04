@@ -6,22 +6,24 @@ import store from "./redux/store.js";
 import { Provider } from "react-redux";
 import ControlPanel from "./components/controlPanel.js";
 
+import "./assets/style/controlPanel.css";
+
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
 root.render(
   <Provider store={store}>
-    <div style={{ display: "flex" }}>
-      <div style={{ width: "20%", height: "100vh", background: "red" }}>
+    <div className="root_container">
+      <div className="control_panel_container">
         <ControlPanel />
       </div>
-      <div style={{ width: "80%", height: "100vh", margin: "0 auto" }}>
+      <div className="canvas_container">
         <Canvas
           shadows
           camera={{
             fov: 75,
             near: 0.1,
             far: 200,
-            position: [10, 4, 4],
+            position: [8, 3, 3],
           }}
         >
           <Experience />

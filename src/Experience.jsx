@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import FloorModel from "./models/floorModel/floorModel";
 import FourByTwo from "./models/floorModel/fourbytwo";
+import { useDispatch, useSelector } from "react-redux";
 
 const doorModel = new THREE.Shape();
 
@@ -168,6 +169,14 @@ const woodColor = new THREE.Color(0xeeeeff);
 const darkWoodColor = new THREE.Color(0xffdbb5);
 
 export default function Experience() {
+  const dispatch = useDispatch();
+
+  const buildingData = useSelector(
+    (state) => state.rootReducer.buildingReducer
+  );
+
+  console.log(buildingData, "Experience");
+
   const woodTexture = useLoader(TextureLoader, "wood.jpg");
   const darkWoodTexture = useLoader(TextureLoader, "darkwood.jpg");
 
@@ -182,7 +191,7 @@ export default function Experience() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <OrbitControls makeDefault target={[10, 1, -5]} />
+      <OrbitControls makeDefault target={[7, 0, -3]} />
       <directionalLight castShadow position={[6, 4, 1]} intensity={3} />
       <ambientLight intensity={0.5} />
       {/* <mesh castShadow position={[-2, 2, 0]}>
@@ -196,11 +205,11 @@ export default function Experience() {
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
       <FloorModel
-        length={14}
-        width={19}
-        tileLength={2}
-        tileWidth={2}
-        gapColor={0xf1f39c}
+        length={buildingData.length}
+        width={buildingData.width}
+        tileLength={buildingData.tileLength}
+        tileWidth={buildingData.tileWidth}
+        gapColor={buildingData.tileGapColor}
         texture={"tile.jpg"}
       />
     </>

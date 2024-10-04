@@ -6,14 +6,15 @@ import * as THREE from "three";
 // first argument of the floorModel.moveTo will be considered for the width of the floor
 
 const FloorModel = ({
-  length = 1,
-  width = 1,
-  tileLength = 2,
-  tileWidth = 2,
+  length,
+  width,
+  tileLength,
+  tileWidth,
   gapColor = 0xf1f3c2,
   texture,
 }) => {
   const [tilesData, setTilesData] = useState([]);
+  console.log(width, "floorTileExtrudeSettings---width");
 
   const tileTexture = useLoader(THREE.TextureLoader, texture);
   const tileGapColor = new THREE.Color(gapColor);
@@ -161,6 +162,12 @@ const FloorModel = ({
               position-y={0.101}
               position-x={i + tileWidth}
             >
+              {console.log(
+                i + tileWidth,
+                i,
+                tileWidth,
+                "floorTileExtrudeSettings"
+              )}
               <extrudeGeometry
                 args={[floorTileModel, floorTileExtrudeSettings]}
               />

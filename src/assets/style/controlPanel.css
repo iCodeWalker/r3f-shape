@@ -1,0 +1,18 @@
+.root_container {
+    display: flex;
+}
+
+.control_panel_container {
+    width: 25vw;
+    height: 100vh;
+    background: #F6F5F2;
+    z-index: 100;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.canvas_container {
+    width: 80vw;
+    height: 100vh;
+    margin: 0 auto;
+}
+
