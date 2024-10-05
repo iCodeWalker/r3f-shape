@@ -10,7 +10,7 @@ const FloorModel = ({
   width,
   tileLength,
   tileWidth,
-  gapColor = 0xf1f3c2,
+  gapColor,
   texture,
 }) => {
   const [tilesData, setTilesData] = useState([]);
@@ -222,8 +222,8 @@ const FloorModel = ({
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight castShadow position={[0, 11, 0]} intensity={1} />
+      <ambientLight intensity={1} />
+      <directionalLight castShadow position={[0, 10, 0]} intensity={2} />
       {tilesData}
     </>
   );

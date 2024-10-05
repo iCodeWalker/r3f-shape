@@ -4,18 +4,29 @@ import Dropdown from "../../components/dropDown.js";
 import { buildingData } from "../../redux/reducers/buidlingReducer.js";
 import { handleTileAttributeChange } from "../../redux/actions/buildingAction.js";
 
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/css";
+
 const SizePanel = () => {
   const dispatch = useDispatch();
 
-  const [hideDropdown, setHideDropdown] = useState(true);
+  const [color, setColor] = useColor("#561ecb");
+
+  const [showColorPicker, setShowColorPicker] = useState(true);
 
   const buildingReducer = useSelector(
     (state) => state.rootReducer.buildingReducer
   );
 
+  const handleTileGapColor = (e) => {
+    console.log(e, "tileGapColor");
+    setColor(e);
+    dispatch(handleTileAttributeChange("tileGapColor", e.hex));
+  };
+
   console.log(buildingReducer, "ControlPanel");
   return (
-    <div style={{ padding: "30px" }}>
+    <div className="sizepanel_container">
       <Dropdown
         label={"Floor Length"}
         funcKey="length"
@@ -38,7 +49,7 @@ const SizePanel = () => {
         funcKey={"tileWidth"}
         options={buildingData.tileData.widthOptions}
       />
-      <p>Textures</p>
+      <p>Textures :</p>
       <div className="image_container">
         {buildingData.tileData.tileTextures.map((item, index) => {
           return (
@@ -60,6 +71,26 @@ const SizePanel = () => {
         <div className="image_item">
           <img src="darkwood.jpg" />
         </div> */}
+      </div>
+      <div>
+        <div>
+          <p>Tile Gap Color :</p>
+          <div
+            className="color_picker_label"
+            onClick={() => setShowColorPicker(!showColorPicker)}
+          >
+            {buildingReducer.tileGapColor}
+          </div>
+        </div>
+        {showColorPicker && (
+          <div className="color_picker_container">
+            <ColorPicker
+              color={color}
+              onChange={handleTileGapColor}
+              hideAlpha={true}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

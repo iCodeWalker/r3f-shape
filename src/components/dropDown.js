@@ -7,13 +7,10 @@ import "../assets/style/customComponents.css";
 const Dropdown = ({ label, funcKey, options }) => {
   const dispatch = useDispatch();
 
-  const [hideDropdown, setHideDropdown] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
   const buildingReducer = useSelector(
     (state) => state.rootReducer.buildingReducer
   );
-
-  console.log(funcKey, "handleDimensionChange");
-  console.log(buildingReducer[funcKey], "buildingReducer");
 
   return (
     <div className="dropdown">
@@ -22,14 +19,14 @@ const Dropdown = ({ label, funcKey, options }) => {
         className="dropdown_select"
         id="length-select"
         onClick={() => {
-          setHideDropdown(!hideDropdown);
+          setShowDropdown(!showDropdown);
         }}
       >
         {buildingReducer[funcKey]}
       </div>
       <div
         className="dropdown_option_container"
-        style={{ display: hideDropdown ? "none" : "" }}
+        style={{ display: showDropdown ? "" : "none" }}
       >
         {options.map((item, index) => {
           return (
@@ -39,9 +36,11 @@ const Dropdown = ({ label, funcKey, options }) => {
               className="dropdown_option"
               onClick={(e) => {
                 console.log(e.target.value);
+                e.stopPropagation();
                 dispatch(
                   handleDimensionChange(funcKey, e.target.dataset.value)
                 );
+                setShowDropdown(false);
               }}
             >
               {item.label}

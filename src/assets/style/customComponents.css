@@ -72,12 +72,45 @@
 }
 
 .image_item {
-    margin: 1rem;
+    margin: 0.5rem;
     cursor: pointer;
 }
 
 img {
-    width: 100px; /* Set your desired width */
-    height: 120px; /* Set your desired height */
+    width: 90px; /* Set your desired width */
+    height: 90px; /* Set your desired height */
     object-fit: cover; 
+}
+
+.sizepanel_container {
+    padding: 2rem;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding-bottom: 50rem;
+}
+
+.color_picker_container {
+    margin-bottom: 10rem;
+}
+
+.color_picker_label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 1.1px;
+    padding: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 0.2rem;
+    background: rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.leftpanel_container {
+    padding: 2rem;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding-bottom: 50rem;
 }

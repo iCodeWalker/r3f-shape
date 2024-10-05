@@ -4,7 +4,7 @@ import "../assets/style/customComponents.css";
 
 import SizePanel from "./sizePanel.js";
 
-const SidePanel = () => {
+const LeftPanel = () => {
   const dispatch = useDispatch();
 
   const [hideDropdown, setHideDropdown] = useState(true);
@@ -15,9 +15,9 @@ const SidePanel = () => {
 
   console.log(buildingReducer, "ControlPanel");
   return (
-    <div style={{ padding: "30px" }}>
+    <div className="leftpanel_container">
       <SizePanel />
     </div>
   );
 };
-export default SidePanel;
+export default LeftPanel;

@@ -51,7 +51,7 @@ const initialState = {
   length: 10,
   tileLength: 2,
   tileWidth: 2,
-  tileGapColor: 0xf1f39c,
+  tileGapColor: "#f1f39c",
   texture: "tile.jpg",
   selectedTexture: "tile.jpg",
 };
@@ -87,8 +87,17 @@ const buildingReducer = (state = initialState, action) => {
     case HANDLE_TILE_ATTRIBUTE_CHANGE:
       // ####### Tile Gap Color #######
       if (action.key === "tileGapColor") {
-        buildingData.tileGapColor = action.value;
-        state = { ...state, tileGapColor: action.value };
+        if (action.value !== "" && action.value != undefined) {
+          let gapColor = action.value.split("#")[1];
+          gapColor = `0x` + gapColor;
+          console.log(gapColor, "gapColorgapColorgapColor");
+          buildingData.tileGapColor = action.value;
+          state = { ...state, tileGapColor: action.value };
+        } else {
+          let defaultTileGapColor = 0xf1f3c2;
+          buildingData.tileGapColor = 0xf1f3c2;
+          state = { ...state, tileGapColor: defaultTileGapColor };
+        }
       }
       // ####### Tile Texture #######
       if (action.key === "selectedTexture") {

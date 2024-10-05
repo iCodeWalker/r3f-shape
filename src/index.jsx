@@ -6,7 +6,7 @@ import store from "./redux/store.js";
 import { Provider } from "react-redux";
 
 import "./assets/style/controlPanel.css";
-import SizePanel from "./panels/sidePanel/sizePanel.js";
+import LeftPanel from "./panels/leftPanel/sizePanel.js";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
@@ -14,7 +14,7 @@ root.render(
   <Provider store={store}>
     <div className="root_container">
       <div className="control_panel_container">
-        <SizePanel />
+        <LeftPanel />
       </div>
       <div className="canvas_container">
         <Canvas
