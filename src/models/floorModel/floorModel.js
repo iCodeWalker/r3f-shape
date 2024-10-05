@@ -218,7 +218,7 @@ const FloorModel = ({
   useEffect(() => {
     let tilesData = verticalTileMesh();
     setTilesData([...tilesData, ...horizontalTileGapData]);
-  }, [length, width, tileLength, tileWidth, gapColor]);
+  }, [length, width, tileLength, tileWidth, gapColor, texture]);
 
   return (
     <>

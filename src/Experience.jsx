@@ -171,11 +171,11 @@ const darkWoodColor = new THREE.Color(0xffdbb5);
 export default function Experience() {
   const dispatch = useDispatch();
 
-  const buildingData = useSelector(
+  const buildingReducer = useSelector(
     (state) => state.rootReducer.buildingReducer
   );
 
-  console.log(buildingData, "Experience");
+  console.log(buildingReducer, "Experience");
 
   const woodTexture = useLoader(TextureLoader, "wood.jpg");
   const darkWoodTexture = useLoader(TextureLoader, "darkwood.jpg");
@@ -205,12 +205,12 @@ export default function Experience() {
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
       <FloorModel
-        length={buildingData.length}
-        width={buildingData.width}
-        tileLength={buildingData.tileLength}
-        tileWidth={buildingData.tileWidth}
-        gapColor={buildingData.tileGapColor}
-        texture={"tile.jpg"}
+        length={buildingReducer.length}
+        width={buildingReducer.width}
+        tileLength={buildingReducer.tileLength}
+        tileWidth={buildingReducer.tileWidth}
+        gapColor={buildingReducer.tileGapColor}
+        texture={buildingReducer.selectedTexture}
       />
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "../../components/dropDown.js";
 import { buildingData } from "../../redux/reducers/buidlingReducer.js";
+import { handleTileAttributeChange } from "../../redux/actions/buildingAction.js";
 
 const SizePanel = () => {
   const dispatch = useDispatch();
@@ -16,12 +17,12 @@ const SizePanel = () => {
   return (
     <div style={{ padding: "30px" }}>
       <Dropdown
-        label={"Length"}
+        label={"Floor Length"}
         funcKey="length"
         options={buildingData.floorData.lengthOptions}
       />
       <Dropdown
-        label={"Width"}
+        label={"Floor Width"}
         funcKey="width"
         options={buildingData.floorData.widthOptions}
       />
@@ -37,6 +38,29 @@ const SizePanel = () => {
         funcKey={"tileWidth"}
         options={buildingData.tileData.widthOptions}
       />
+      <p>Textures</p>
+      <div className="image_container">
+        {buildingData.tileData.tileTextures.map((item, index) => {
+          return (
+            <div
+              className="image_item"
+              onClick={(e) => {
+                console.log(e, "image_container");
+                dispatch(handleTileAttributeChange("selectedTexture", item));
+              }}
+            >
+              <img src={item} />
+            </div>
+          );
+        })}
+
+        {/* <div className="image_item">
+          <img src="wood.jpg" />
+        </div>
+        <div className="image_item">
+          <img src="darkwood.jpg" />
+        </div> */}
+      </div>
     </div>
   );
 };
