@@ -9,12 +9,46 @@ export const buildingData = {
   tileLength: "",
   tileWidth: "",
   tileGapColor: "",
+  floorData: {
+    widthOptions: [
+      { label: "10", value: "10" },
+      { label: "20", value: "20" },
+      { label: "30", value: "30" },
+      { label: "40", value: "40" },
+      { label: "50", value: "50" },
+      { label: "60", value: "60" },
+      { label: "70", value: "70" },
+    ],
+    lengthOptions: [
+      { label: "10", value: "10" },
+      { label: "20", value: "20" },
+      { label: "30", value: "30" },
+      { label: "40", value: "40" },
+      { label: "50", value: "50" },
+      { label: "60", value: "60" },
+      { label: "70", value: "70" },
+    ],
+    floorTextures: [],
+  },
+  tileData: {
+    widthOptions: [
+      { label: "1", value: "1" },
+      { label: "2", value: "2" },
+      { label: "4", value: "4" },
+    ],
+    lengthOptions: [
+      { label: "1", value: "1" },
+      { label: "2", value: "2" },
+    ],
+    gapColorOptions: [],
+    tileTextures: [],
+  },
 };
 
 const initialState = {
   width: 10,
   length: 10,
-  tileLength: 4,
+  tileLength: 2,
   tileWidth: 2,
   tileGapColor: 0xf1f39c,
   texture: "tile.jpg",
