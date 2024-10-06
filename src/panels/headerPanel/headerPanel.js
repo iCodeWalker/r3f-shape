@@ -1,6 +1,6 @@
 import React from "react";
 
-const ControlPanel = () => {
+const HeaderPanel = () => {
   return (
     <div>
       <p>Control Panel</p>
@@ -8,4 +8,4 @@ const ControlPanel = () => {
   );
 };
 
-export default ControlPanel;
+export default HeaderPanel;

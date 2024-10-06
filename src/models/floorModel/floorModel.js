@@ -46,6 +46,22 @@ const FloorModel = ({
 
     return floorLastTileModel;
   };
+
+  // ################### Floor Tile Model : last tile extrude setting function if length is not multiple of 2 ###################
+
+  const floorVerticalLastTileExtrudeSetting = (zDistance) => {
+    const extrudeSetting = {
+      depth: -zDistance,
+      bevelEnabled: false,
+      bevelSegments: 0,
+      steps: 1,
+      bevelSize: 0.1,
+      bevelThickness: 1,
+    };
+
+    return extrudeSetting;
+  };
+
   // ################### Floor Tile Extrude Setting  ###################
   const floorTileExtrudeSettings = {
     depth: -tileLength,
@@ -109,13 +125,15 @@ const FloorModel = ({
 
   let horizontalTileGapData = [];
   for (let i = 0; i < length; i++) {
-    if (i % 1 == 0 && tileLength == 1) {
-      horizontalTileGapData.push(horizontalTileGap(i));
-    }
-    if (i % 2 == 0 && (tileLength == 2 || tileLength == 4)) {
+    // if (i % 1 == 0 && tileLength == 1) {
+    //   horizontalTileGapData.push(horizontalTileGap(i));
+    // }
+    if (i % tileLength == 0) {
       horizontalTileGapData.push(horizontalTileGap(i));
     }
   }
+
+  console.log(horizontalTileGapData, "datadata----after");
 
   let floorTileStartingCoordinates = [];
   for (let i = 0; i <= width; i++) {
@@ -127,7 +145,7 @@ const FloorModel = ({
   }
 
   // ################### Function to create horizontal/along width tile meshes ###################
-  const horizontalTileMesh = (zPosition) => {
+  const horizontalTileMesh = (zPosition, verticalLastIndex) => {
     const horizontalMeshData = [];
 
     for (let i = 0; i <= width; i++) {
@@ -143,6 +161,44 @@ const FloorModel = ({
           {/* Main tile Mesh */}
 
           {i == lastCordinate ? (
+            // #################### For last veritcal tile ####################
+            verticalLastIndex === true ? (
+              <mesh
+                position-z={-zPosition}
+                position-y={0.101}
+                position-x={i + tileWidth}
+              >
+                <extrudeGeometry
+                  args={[
+                    floorLastTileModel(width - lastCordinate),
+                    floorVerticalLastTileExtrudeSetting(length - zPosition),
+                  ]}
+                />
+                <meshStandardMaterial
+                  map={tileTexture}
+                  side={THREE.DoubleSide}
+                />
+              </mesh>
+            ) : (
+              <mesh
+                position-z={-zPosition}
+                position-y={0.101}
+                position-x={i + tileWidth}
+              >
+                <extrudeGeometry
+                  args={[
+                    floorLastTileModel(width - lastCordinate),
+                    floorTileExtrudeSettings,
+                  ]}
+                />
+                <meshStandardMaterial
+                  map={tileTexture}
+                  side={THREE.DoubleSide}
+                />
+              </mesh>
+            )
+          ) : verticalLastIndex === true ? (
+            // ############## If length is not multiple of 2 ################
             <mesh
               position-z={-zPosition}
               position-y={0.101}
@@ -150,26 +206,9 @@ const FloorModel = ({
             >
               <extrudeGeometry
                 args={[
-                  floorLastTileModel(width - lastCordinate),
-                  floorTileExtrudeSettings,
+                  floorTileModel,
+                  floorVerticalLastTileExtrudeSetting(length - zPosition),
                 ]}
-              />
-              <meshStandardMaterial map={tileTexture} side={THREE.DoubleSide} />
-            </mesh>
-          ) : (
-            <mesh
-              position-z={-zPosition}
-              position-y={0.101}
-              position-x={i + tileWidth}
-            >
-              {console.log(
-                i + tileWidth,
-                i,
-                tileWidth,
-                "floorTileExtrudeSettings"
-              )}
-              <extrudeGeometry
-                args={[floorTileModel, floorTileExtrudeSettings]}
               />
               <meshStandardMaterial
                 // color={tileGapColor}
@@ -177,9 +216,25 @@ const FloorModel = ({
                 side={THREE.DoubleSide}
               />
             </mesh>
+          ) : (
+            // ################ if length multiple of 2 ###################
+            <mesh
+              position-z={-zPosition}
+              position-y={0.101}
+              position-x={i + tileWidth}
+            >
+              <extrudeGeometry
+                args={[floorTileModel, floorTileExtrudeSettings]}
+              />
+              <meshStandardMaterial
+                // color={"red"}
+                map={tileTexture}
+                side={THREE.DoubleSide}
+              />
+            </mesh>
           )}
 
-          {/* right tile gap */}
+          {/* #################### right tile gap ################ */}
           <mesh
             position-z={-0.001}
             position-y={0.102}
@@ -209,8 +264,15 @@ const FloorModel = ({
       if (i % tileLength !== 0) {
         continue;
       }
+      console.log(i, "datadata----after");
 
-      verticalMeshData.push(horizontalTileMesh(i));
+      // ############## For last vertical tile if length is odd number #############
+
+      if (i === length - 1) {
+        verticalMeshData.push(horizontalTileMesh(i, true));
+      } else {
+        verticalMeshData.push(horizontalTileMesh(i, false));
+      }
     }
     return verticalMeshData;
   };

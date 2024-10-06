@@ -34,11 +34,18 @@ export const buildingData = {
     widthOptions: [
       { label: "1", value: "1" },
       { label: "2", value: "2" },
+      { label: "3", value: "3" },
       { label: "4", value: "4" },
+      { label: "5", value: "5" },
+      { label: "6", value: "6" },
     ],
     lengthOptions: [
       { label: "1", value: "1" },
       { label: "2", value: "2" },
+      { label: "3", value: "3" },
+      { label: "4", value: "4" },
+      { label: "5", value: "5" },
+      { label: "6", value: "6" },
     ],
     gapColorOptions: [],
     tileTextures: ["tile.jpg", "wood.jpg", "darkwood.jpg"],
@@ -88,9 +95,6 @@ const buildingReducer = (state = initialState, action) => {
       // ####### Tile Gap Color #######
       if (action.key === "tileGapColor") {
         if (action.value !== "" && action.value != undefined) {
-          let gapColor = action.value.split("#")[1];
-          gapColor = `0x` + gapColor;
-          console.log(gapColor, "gapColorgapColorgapColor");
           buildingData.tileGapColor = action.value;
           state = { ...state, tileGapColor: action.value };
         } else {
