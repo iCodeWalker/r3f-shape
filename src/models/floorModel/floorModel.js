@@ -14,7 +14,6 @@ const FloorModel = ({
   texture,
 }) => {
   const [tilesData, setTilesData] = useState([]);
-  console.log(width, "floorTileExtrudeSettings---width");
 
   const tileTexture = useLoader(THREE.TextureLoader, texture);
   const tileGapColor = new THREE.Color(gapColor);
@@ -26,8 +25,8 @@ const FloorModel = ({
   // ################### Floor Tile Model ###################
   // Subtracted tile gap value from tile size = tileWidth - 0.01
   const floorTileModel = new THREE.Shape();
-  floorTileModel.moveTo(-0 - 0.01, 0); // Start point
-  floorTileModel.lineTo(-0 - 0.01, 0.1); // Top left
+  floorTileModel.moveTo(0 - 0.01, 0); // Start point
+  floorTileModel.lineTo(0 - 0.01, 0.1); // Top left
   floorTileModel.lineTo(tileWidth - 0.01, 0.1); // Top right
   floorTileModel.lineTo(tileWidth - 0.01, 0); // Bottom right
   floorTileModel.lineTo(0 - 0.01, 0); // Back to the start point
@@ -152,6 +151,7 @@ const FloorModel = ({
       if (i % tileWidth !== 0) {
         continue;
       }
+      console.log(i, "horizontalTileMesh");
 
       let lastCordinate =
         floorTileStartingCoordinates[floorTileStartingCoordinates.length - 1];
@@ -260,15 +260,20 @@ const FloorModel = ({
     const verticalMeshData = [];
 
     for (let i = 0; i < length; i++) {
-      console.log(i, "datadata");
       if (i % tileLength !== 0) {
         continue;
       }
-      console.log(i, "datadata----after");
 
       // ############## For last vertical tile if length is odd number #############
 
-      if (i === length - 1) {
+      if (
+        i === length - 1 || // For tile length 1, 2, 4, 8
+        i === length - 2 || // For tile length 3, 5
+        i === length - 3 || // For tile length 7
+        i === length - 5 || // For tile length 6
+        i === length - 7 || // For tile length 10
+        i === length - 8 // For tile length 9
+      ) {
         verticalMeshData.push(horizontalTileMesh(i, true));
       } else {
         verticalMeshData.push(horizontalTileMesh(i, false));

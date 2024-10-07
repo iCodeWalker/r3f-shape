@@ -6,6 +6,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import FloorModel from "./models/floorModel/floorModel";
 import FourByTwo from "./models/floorModel/fourbytwo";
 import { useDispatch, useSelector } from "react-redux";
+import LeftWallModel from "./models/wallModel/leftWallModel";
+import RightWallModel from "./models/wallModel/rightWallModel";
+import BackWallModel from "./models/wallModel/backWallModel";
+import FrontWallModel from "./models/wallModel/frontWallModel";
 
 const doorModel = new THREE.Shape();
 
@@ -191,7 +195,7 @@ export default function Experience() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <OrbitControls makeDefault target={[7, 0, -3]} />
+      <OrbitControls makeDefault target={[7, 0, -7]} />
       <directionalLight castShadow position={[6, 4, 1]} intensity={1.5} />
       <ambientLight intensity={0.5} />
       {/* <mesh castShadow position={[-2, 2, 0]}>
@@ -211,6 +215,35 @@ export default function Experience() {
         tileWidth={buildingReducer.tileWidth}
         gapColor={buildingReducer.tileGapColor}
         texture={buildingReducer.selectedTexture}
+      />
+
+      <LeftWallModel
+        wallLength={buildingReducer.length}
+        xCoordinateShiftLeftWall={buildingReducer.tileWidth}
+        // texture={buildingReducer.selectedTexture}
+        wallColor={buildingReducer.tileGapColor}
+      />
+      <RightWallModel
+        wallLength={buildingReducer.length}
+        xCoordinateShiftRightWall={
+          buildingReducer.width + buildingReducer.tileWidth
+        }
+        // texture={buildingReducer.selectedTexture}
+        wallColor={buildingReducer.tileGapColor}
+      />
+      <BackWallModel
+        wallLength={buildingReducer.width}
+        zCoordinateShiftBackWall={buildingReducer.length}
+        xCoordinateShiftBackWall={buildingReducer.tileWidth}
+        // texture={buildingReducer.selectedTexture}
+        wallColor={buildingReducer.tileGapColor}
+      />
+      <FrontWallModel
+        wallLength={buildingReducer.width}
+        zCoordinateShiftBackWall={buildingReducer.length}
+        xCoordinateShiftFrontWall={buildingReducer.tileWidth}
+        // texture={buildingReducer.selectedTexture}
+        wallColor={buildingReducer.tileGapColor}
       />
     </>
   );

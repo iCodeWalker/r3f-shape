@@ -46,6 +46,10 @@ export const buildingData = {
       { label: "4", value: "4" },
       { label: "5", value: "5" },
       { label: "6", value: "6" },
+      { label: "7", value: "7" },
+      { label: "8", value: "8" },
+      { label: "9", value: "9" },
+      { label: "10", value: "10" },
     ],
     gapColorOptions: [],
     tileTextures: ["tile.jpg", "wood.jpg", "darkwood.jpg"],
@@ -54,8 +58,8 @@ export const buildingData = {
 };
 
 const initialState = {
-  width: 10,
-  length: 10,
+  width: 30,
+  length: 30,
   tileLength: 2,
   tileWidth: 2,
   tileGapColor: "#f1f39c",
