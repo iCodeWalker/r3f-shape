@@ -209,8 +209,8 @@ export default function Experience() {
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
       <FloorModel
-        length={20}
-        width={20}
+        length={buildingReducer.length}
+        width={buildingReducer.width}
         tileLength={buildingReducer.tileLength}
         tileWidth={buildingReducer.tileWidth}
         gapColor={buildingReducer.tileGapColor}

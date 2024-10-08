@@ -237,7 +237,7 @@ const FloorModel = ({
           )}
 
           {/* #################### right tile gap ################ */}
-          {i != 0 && (
+          {i == 0 || (i == lastCordinate && lastCordinate == width) ? null : (
             <mesh
               position-z={-0.001}
               position-y={0.102}
