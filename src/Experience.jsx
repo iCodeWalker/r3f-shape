@@ -209,15 +209,15 @@ export default function Experience() {
       {/*  Left */}
       {/* <FloorModel length={14} width={14} /> */}
       <FloorModel
-        length={buildingReducer.length}
-        width={buildingReducer.width}
+        length={20}
+        width={20}
         tileLength={buildingReducer.tileLength}
         tileWidth={buildingReducer.tileWidth}
         gapColor={buildingReducer.tileGapColor}
         texture={buildingReducer.selectedTexture}
       />
 
-      <LeftWallModel
+      {/* <LeftWallModel
         wallLength={buildingReducer.length}
         xCoordinateShiftLeftWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
@@ -232,19 +232,19 @@ export default function Experience() {
         wallColor={buildingReducer.tileGapColor}
       />
       <BackWallModel
-        wallLength={buildingReducer.width}
-        zCoordinateShiftBackWall={buildingReducer.length}
+        wallLength={buildingReducer.width + 0.202}
+        zCoordinateShiftBackWall={buildingReducer.length + 0.101}
         xCoordinateShiftBackWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
       />
       <FrontWallModel
-        wallLength={buildingReducer.width}
+        wallLength={buildingReducer.width + 0.202}
         zCoordinateShiftBackWall={buildingReducer.length}
         xCoordinateShiftFrontWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
-      />
+      /> */}
     </>
   );
 }
