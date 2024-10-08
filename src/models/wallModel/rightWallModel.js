@@ -15,8 +15,8 @@ const RightWallModel = ({
 
   rightWallModel.moveTo(0, 0);
   rightWallModel.lineTo(0, 11); // y-coordinate is height, x-coordinate is width of wall
-  rightWallModel.lineTo(0.1, 11); // y-coordinate is height, x-coordinate is width of wall
-  rightWallModel.lineTo(0.1, 0);
+  rightWallModel.lineTo(0.5, 11); // y-coordinate is height, x-coordinate is width of wall
+  rightWallModel.lineTo(0.5, 0);
   rightWallModel.lineTo(0, 0);
   rightWallModel.closePath();
 

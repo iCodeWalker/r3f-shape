@@ -26,8 +26,8 @@ const FloorModel = ({
   // Subtracted tile gap value from tile size = tileWidth - 0.01
   const floorTileModel = new THREE.Shape();
   floorTileModel.moveTo(0 - 0.01, 0); // Start point
-  floorTileModel.lineTo(0 - 0.01, 0.1); // Top left
-  floorTileModel.lineTo(tileWidth - 0.01, 0.1); // Top right
+  floorTileModel.lineTo(0 - 0.01, 0.25); // Top left
+  floorTileModel.lineTo(tileWidth - 0.01, 0.25); // Top right
   floorTileModel.lineTo(tileWidth - 0.01, 0); // Bottom right
   floorTileModel.lineTo(0 - 0.01, 0); // Back to the start point
   floorTileModel.closePath(); // Close the path
@@ -37,8 +37,8 @@ const FloorModel = ({
     console.log(x, "floorLastTileModel");
     const floorLastTileModel = new THREE.Shape();
     floorLastTileModel.moveTo(0 - 0.01, 0); // Start point
-    floorLastTileModel.lineTo(0 - 0.01, 0.1); // Top left
-    floorLastTileModel.lineTo(x - 0.01, 0.1); // Top right
+    floorLastTileModel.lineTo(0 - 0.01, 0.25); // Top left
+    floorLastTileModel.lineTo(x - 0.01, 0.25); // Top right
     floorLastTileModel.lineTo(x - 0.01, 0); // Bottom right
     floorLastTileModel.lineTo(0 - 0.01, 0); // Back to the start point
     floorLastTileModel.closePath(); // Close the path
@@ -74,8 +74,8 @@ const FloorModel = ({
   // ################### Floor Tile-Gap Model ###################
   const floorTileGapModel = new THREE.Shape();
   floorTileGapModel.moveTo(-0.01, 0);
-  floorTileGapModel.lineTo(-0.01, 0.101);
-  floorTileGapModel.lineTo(0.01, 0.101);
+  floorTileGapModel.lineTo(-0.01, 0.251);
+  floorTileGapModel.lineTo(0.01, 0.251);
   floorTileGapModel.lineTo(0.01, 0);
   floorTileGapModel.lineTo(-0.01, 0);
   floorTileGapModel.closePath();
@@ -127,7 +127,7 @@ const FloorModel = ({
     // if (i % 1 == 0 && tileLength == 1) {
     //   horizontalTileGapData.push(horizontalTileGap(i));
     // }
-    if (i % tileLength == 0) {
+    if (i % tileLength == 0 && i != 0) {
       horizontalTileGapData.push(horizontalTileGap(i));
     }
   }
@@ -155,6 +155,8 @@ const FloorModel = ({
 
       let lastCordinate =
         floorTileStartingCoordinates[floorTileStartingCoordinates.length - 1];
+
+      console.log(lastCordinate, "horizontalTileMesh");
 
       horizontalMeshData.push(
         <group>
@@ -235,20 +237,23 @@ const FloorModel = ({
           )}
 
           {/* #################### right tile gap ################ */}
-          <mesh
-            position-z={-0.001}
-            position-y={0.102}
-            position-x={i + tileWidth - 0.01}
-          >
-            <extrudeGeometry
-              args={[floorTileGapModel, floorTileGapExtrudeSettings]}
-            />
-            <meshStandardMaterial
-              color={tileGapColor}
-              map={tileTexture}
-              side={THREE.DoubleSide}
-            />
-          </mesh>
+          {i != 0 && (
+            <mesh
+              position-z={-0.001}
+              position-y={0.102}
+              position-x={i + tileWidth - 0.01}
+            >
+              {console.log(i, lastCordinate, width, "lastCordinate")}
+              <extrudeGeometry
+                args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+              />
+              <meshStandardMaterial
+                color={"red"}
+                map={tileTexture}
+                side={THREE.DoubleSide}
+              />
+            </mesh>
+          )}
         </group>
       );
     }
@@ -260,7 +265,7 @@ const FloorModel = ({
     const verticalMeshData = [];
 
     for (let i = 0; i < length; i++) {
-      if (i % tileLength !== 0) {
+      if (i % tileLength !== 0 && i != 0) {
         continue;
       }
 

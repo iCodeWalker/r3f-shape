@@ -15,8 +15,8 @@ const FrontWallModel = ({
 
   frontWallModel.moveTo(0, 0);
   frontWallModel.lineTo(0, 11); // y-coordinate is height, x-coordinate is width of wall
-  frontWallModel.lineTo(0.1, 11); // y-coordinate is height, x-coordinate is width of wall
-  frontWallModel.lineTo(0.1, 0);
+  frontWallModel.lineTo(0.5, 11); // y-coordinate is height, x-coordinate is width of wall
+  frontWallModel.lineTo(0.5, 0);
   frontWallModel.lineTo(0, 0);
   frontWallModel.closePath();
 
@@ -33,7 +33,7 @@ const FrontWallModel = ({
     <mesh
       position-z={0}
       position-y={0.102}
-      position-x={xCoordinateShiftFrontWall}
+      position-x={xCoordinateShiftFrontWall - 0.101}
       rotation={[0, -Math.PI / 2, 0]}
     >
       {/* position-x={xCoordinateShift - 0.121} */}

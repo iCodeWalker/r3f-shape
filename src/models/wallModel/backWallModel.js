@@ -16,8 +16,8 @@ const BackWallModel = ({
 
   backWallModel.moveTo(0, 0);
   backWallModel.lineTo(0, 11); // y-coordinate is height, x-coordinate is width of wall
-  backWallModel.lineTo(0.1, 11); // y-coordinate is height, x-coordinate is width of wall
-  backWallModel.lineTo(0.1, 0);
+  backWallModel.lineTo(0.5, 11); // y-coordinate is height, x-coordinate is width of wall
+  backWallModel.lineTo(0.5, 0);
   backWallModel.lineTo(0, 0);
   backWallModel.closePath();
 
@@ -34,7 +34,7 @@ const BackWallModel = ({
     <mesh
       position-z={-zCoordinateShiftBackWall}
       position-y={0.102}
-      position-x={xCoordinateShiftBackWall}
+      position-x={xCoordinateShiftBackWall - 0.101}
       rotation={[0, -Math.PI / 2, 0]}
     >
       {/* position-x={xCoordinateShift - 0.121} */}
