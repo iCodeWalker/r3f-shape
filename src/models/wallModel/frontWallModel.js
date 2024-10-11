@@ -31,7 +31,7 @@ const FrontWallModel = ({
   };
   return (
     <mesh
-      position-z={0}
+      position-z={0.001}
       position-y={0.102}
       position-x={xCoordinateShiftFrontWall - 0.101}
       rotation={[0, -Math.PI / 2, 0]}
