@@ -10,6 +10,7 @@ import LeftWallModel from "./models/wallModel/leftWallModel";
 import RightWallModel from "./models/wallModel/rightWallModel";
 import BackWallModel from "./models/wallModel/backWallModel";
 import FrontWallModel from "./models/wallModel/frontWallModel";
+import { AxesHelper } from "three";
 
 const doorModel = new THREE.Shape();
 
@@ -194,15 +195,16 @@ export default function Experience() {
 
   return (
     <>
-      {/* <Perf position="top-left" /> */}
+      <Perf position="top-left" />
       <OrbitControls makeDefault target={[7, 0, -7]} />
       <directionalLight castShadow position={[6, 4, 1]} intensity={1.5} />
       <ambientLight intensity={0.5} />
+      <axesHelper args={[10]} />
       {/* <mesh castShadow position={[-2, 2, 0]}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
-      </mesh> */}
-      {/* <mesh castShadow position={[2, 2, 0]}>
+      </mesh>
+      <mesh castShadow position={[2, 2, 0]}>
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
       </mesh> */}
@@ -217,13 +219,13 @@ export default function Experience() {
         texture={buildingReducer.selectedTexture}
       />
 
-      <FrontWallModel
+      {/* <FrontWallModel
         wallLength={buildingReducer.width}
         zCoordinateShiftBackWall={buildingReducer.length}
         xCoordinateShiftFrontWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
-      />
+      /> */}
 
       {/* <LeftWallModel
         wallLength={buildingReducer.length}

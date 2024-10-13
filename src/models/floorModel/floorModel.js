@@ -105,7 +105,7 @@ const FloorModel = ({
       <mesh
         position-z={-zPosition}
         position-y={0.102}
-        position-x={tileWidth}
+        position-x={0}
         rotation={[0, -Math.PI / 2, 0]}
       >
         <extrudeGeometry
@@ -151,7 +151,7 @@ const FloorModel = ({
       if (i % tileWidth !== 0) {
         continue;
       }
-      console.log(i, "horizontalTileMesh");
+      console.log(i, "horizontalTileMesh------i");
 
       let lastCordinate =
         floorTileStartingCoordinates[floorTileStartingCoordinates.length - 1];
@@ -165,11 +165,7 @@ const FloorModel = ({
           {i == lastCordinate ? (
             // #################### For last veritcal tile ####################
             verticalLastIndex === true ? (
-              <mesh
-                position-z={-zPosition}
-                position-y={0.101}
-                position-x={i + tileWidth}
-              >
+              <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
                 <extrudeGeometry
                   args={[
                     floorLastTileModel(width - lastCordinate),
@@ -182,11 +178,7 @@ const FloorModel = ({
                 />
               </mesh>
             ) : (
-              <mesh
-                position-z={-zPosition}
-                position-y={0.101}
-                position-x={i + tileWidth}
-              >
+              <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
                 <extrudeGeometry
                   args={[
                     floorLastTileModel(width - lastCordinate),
@@ -201,11 +193,7 @@ const FloorModel = ({
             )
           ) : verticalLastIndex === true ? (
             // ############## If length is not multiple of 2 ################
-            <mesh
-              position-z={-zPosition}
-              position-y={0.101}
-              position-x={i + tileWidth}
-            >
+            <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
               <extrudeGeometry
                 args={[
                   floorTileModel,
@@ -220,11 +208,8 @@ const FloorModel = ({
             </mesh>
           ) : (
             // ################ if length multiple of 2 ###################
-            <mesh
-              position-z={-zPosition}
-              position-y={0.101}
-              position-x={i + tileWidth}
-            >
+            <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
+              {console.log(i, "dsadsadsadasdada")}
               <extrudeGeometry
                 args={[floorTileModel, floorTileExtrudeSettings]}
               />
