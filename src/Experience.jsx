@@ -218,7 +218,7 @@ export default function Experience() {
       />
 
       <FrontWallModel
-        wallLength={buildingReducer.width + 0.202}
+        wallLength={buildingReducer.width}
         zCoordinateShiftBackWall={buildingReducer.length}
         xCoordinateShiftFrontWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
