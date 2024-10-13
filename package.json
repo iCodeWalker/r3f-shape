@@ -14,6 +14,7 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
+    "@react-three/csg": "^3.2.0",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.3",
     "@reduxjs/toolkit": "^2.2.7",
