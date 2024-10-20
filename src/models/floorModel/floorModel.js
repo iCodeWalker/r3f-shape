@@ -104,7 +104,7 @@ const FloorModel = ({
     return (
       <mesh
         position-z={-zPosition}
-        position-y={0.102}
+        position-y={0.001}
         position-x={0}
         rotation={[0, -Math.PI / 2, 0]}
       >
@@ -165,7 +165,7 @@ const FloorModel = ({
           {i == lastCordinate ? (
             // #################### For last veritcal tile ####################
             verticalLastIndex === true ? (
-              <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
+              <mesh position-z={-zPosition} position-y={0} position-x={i}>
                 <extrudeGeometry
                   args={[
                     floorLastTileModel(width - lastCordinate),
@@ -178,7 +178,7 @@ const FloorModel = ({
                 />
               </mesh>
             ) : (
-              <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
+              <mesh position-z={-zPosition} position-y={0} position-x={i}>
                 <extrudeGeometry
                   args={[
                     floorLastTileModel(width - lastCordinate),
@@ -193,7 +193,7 @@ const FloorModel = ({
             )
           ) : verticalLastIndex === true ? (
             // ############## If length is not multiple of 2 ################
-            <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
+            <mesh position-z={-zPosition} position-y={0} position-x={i}>
               <extrudeGeometry
                 args={[
                   floorTileModel,
@@ -208,7 +208,7 @@ const FloorModel = ({
             </mesh>
           ) : (
             // ################ if length multiple of 2 ###################
-            <mesh position-z={-zPosition} position-y={0.101} position-x={i}>
+            <mesh position-z={-zPosition} position-y={0} position-x={i}>
               {console.log(i, "dsadsadsadasdada")}
               <extrudeGeometry
                 args={[floorTileModel, floorTileExtrudeSettings]}
@@ -227,7 +227,7 @@ const FloorModel = ({
             lastCordinate - i === tileWidth) ? null : (
             <mesh
               position-z={-0.001}
-              position-y={0.102}
+              position-y={0.001}
               position-x={i + tileWidth - 0.01}
             >
               {console.log(i, lastCordinate, width, "lastCordinate")}
@@ -235,7 +235,8 @@ const FloorModel = ({
                 args={[floorTileGapModel, floorTileGapExtrudeSettings]}
               />
               <meshStandardMaterial
-                color={"red"}
+                // color={"red"}
+                color={tileGapColor}
                 map={tileTexture}
                 side={THREE.DoubleSide}
               />

@@ -199,7 +199,7 @@ export default function Experience() {
       <OrbitControls makeDefault target={[7, 0, -7]} />
       <directionalLight castShadow position={[6, 4, 1]} intensity={1.5} />
       <ambientLight intensity={0.5} />
-      <axesHelper args={[10]} />
+      <axesHelper args={[20]} />
       {/* <mesh castShadow position={[-2, 2, 0]}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
