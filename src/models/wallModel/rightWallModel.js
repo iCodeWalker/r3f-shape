@@ -1,5 +1,6 @@
 import { useLoader } from "@react-three/fiber";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import * as THREE from "three";
 
 const RightWallModel = ({
@@ -12,6 +13,10 @@ const RightWallModel = ({
 
   // ################### Right Wall Model ###################
   const rightWallModel = new THREE.Shape();
+
+  const buildingReducer = useSelector(
+    (state) => state.rootReducer.buildingReducer
+  );
 
   rightWallModel.moveTo(0, 0);
   rightWallModel.lineTo(0, 11); // y-coordinate is height, x-coordinate is width of wall
@@ -30,11 +35,7 @@ const RightWallModel = ({
     bevelThickness: 1,
   };
   return (
-    <mesh
-      position-z={0}
-      position-y={0.102}
-      position-x={xCoordinateShiftRightWall}
-    >
+    <mesh position-z={0} position-y={0} position-x={xCoordinateShiftRightWall}>
       {/* position-x={xCoordinateShift - 0.121} */}
       <extrudeGeometry args={[rightWallModel, rightWallExtrudeSettings]} />
       <meshStandardMaterial

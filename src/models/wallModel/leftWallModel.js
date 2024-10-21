@@ -1,3 +1,4 @@
+import { Html } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
@@ -30,11 +31,8 @@ const LeftWallModel = ({
     bevelThickness: 1,
   };
   return (
-    <mesh
-      position-z={0}
-      position-y={0.102}
-      position-x={xCoordinateShiftLeftWall - 0.1}
-    >
+    // x position of wall is negative shoft of the wall width
+    <mesh position-z={0} position-y={0} position-x={-0.511}>
       {/* position-x={xCoordinateShift - 0.121} */}
       <extrudeGeometry args={[leftWallModel, leftWallExtrudeSettings]} />
 
@@ -43,6 +41,15 @@ const LeftWallModel = ({
         side={THREE.DoubleSide}
         // map={wallTexture}
       />
+      <Html
+        position={[-0.5, , 0]}
+        wrapperClass="label"
+        center
+        distanceFactor={10}
+        // occlude={[sphere, cube]}
+      >
+        Right Wall
+      </Html>
     </mesh>
   );
 };

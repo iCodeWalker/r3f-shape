@@ -227,7 +227,7 @@ export default function Experience() {
         wallColor={buildingReducer.tileGapColor}
       /> */}
 
-      {/* <LeftWallModel
+      <LeftWallModel
         wallLength={buildingReducer.length}
         xCoordinateShiftLeftWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
@@ -235,13 +235,11 @@ export default function Experience() {
       />
       <RightWallModel
         wallLength={buildingReducer.length}
-        xCoordinateShiftRightWall={
-          buildingReducer.width + buildingReducer.tileWidth
-        }
+        xCoordinateShiftRightWall={buildingReducer.width - 0.009}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
       />
-      <BackWallModel
+      {/*<BackWallModel
         wallLength={buildingReducer.width + 0.202}
         zCoordinateShiftBackWall={buildingReducer.length + 0.101}
         xCoordinateShiftBackWall={buildingReducer.tileWidth}
