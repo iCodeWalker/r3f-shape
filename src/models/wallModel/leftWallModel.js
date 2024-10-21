@@ -1,6 +1,6 @@
 import { Html } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 const LeftWallModel = ({
@@ -10,6 +10,8 @@ const LeftWallModel = ({
   wallColor,
 }) => {
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
+
+  const leftWallRef = useRef();
 
   // ################### Left Wall Model ###################
   const leftWallModel = new THREE.Shape();
@@ -32,7 +34,7 @@ const LeftWallModel = ({
   };
   return (
     // x position of wall is negative shoft of the wall width
-    <mesh position-z={0} position-y={0} position-x={-0.511}>
+    <mesh position-z={0} position-y={0} position-x={-0.511} ref={leftWallRef}>
       {/* position-x={xCoordinateShift - 0.121} */}
       <extrudeGeometry args={[leftWallModel, leftWallExtrudeSettings]} />
 
@@ -42,13 +44,13 @@ const LeftWallModel = ({
         // map={wallTexture}
       />
       <Html
-        position={[-0.5, , 0]}
+        position={[-1, 7, -15]}
         wrapperClass="label"
         center
-        distanceFactor={10}
-        // occlude={[sphere, cube]}
+        distanceFactor={20}
+        occlude={[leftWallRef]}
       >
-        Right Wall
+        Left Wall
       </Html>
     </mesh>
   );
