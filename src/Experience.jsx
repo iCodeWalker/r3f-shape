@@ -239,13 +239,13 @@ export default function Experience() {
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
       />
-      {/*<BackWallModel
+      <BackWallModel
         wallLength={buildingReducer.width + 0.202}
         zCoordinateShiftBackWall={buildingReducer.length + 0.101}
         xCoordinateShiftBackWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
-      /> */}
+      />
     </>
   );
 }
