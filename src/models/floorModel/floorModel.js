@@ -151,7 +151,6 @@ const FloorModel = ({
       if (i % tileWidth !== 0) {
         continue;
       }
-      console.log(i, "horizontalTileMesh------i");
 
       let lastCordinate =
         floorTileStartingCoordinates[floorTileStartingCoordinates.length - 1];
@@ -178,7 +177,18 @@ const FloorModel = ({
                 />
               </mesh>
             ) : (
+              // length - zPosition >= tileLength ? (
               <mesh position-z={-zPosition} position-y={0} position-x={i}>
+                {console.log(
+                  length - lastCordinate,
+                  tileLength,
+                  lastCordinate,
+                  i,
+                  zPosition,
+                  length - zPosition,
+                  "zPosition---------------"
+                )}
+
                 <extrudeGeometry
                   args={[
                     floorLastTileModel(width - lastCordinate),
@@ -191,7 +201,32 @@ const FloorModel = ({
                 />
               </mesh>
             )
-          ) : verticalLastIndex === true ? (
+          ) : // ) : (
+          //   <mesh position-z={-zPosition} position-y={0} position-x={i}>
+          //     {console.log(
+          //       length - lastCordinate,
+          //       tileLength,
+          //       lastCordinate,
+          //       i,
+          //       zPosition,
+          //       length - zPosition,
+          //       "zPosition---------------"
+          //     )}
+
+          //     <extrudeGeometry
+          //       args={[
+          //         floorLastTileModel(width - lastCordinate),
+          //         floorVerticalLastTileExtrudeSetting(length - zPosition),
+          //       ]}
+          //     />
+          //     <meshStandardMaterial
+          //       // map={tileTexture}
+          //       color={"red"}
+          //       side={THREE.DoubleSide}
+          //     />
+          //   </mesh>
+          // )
+          verticalLastIndex === true ? (
             // ############## If length is not multiple of 2 ################
             <mesh position-z={-zPosition} position-y={0} position-x={i}>
               <extrudeGeometry
@@ -265,7 +300,8 @@ const FloorModel = ({
         i === length - 3 || // For tile length 7
         i === length - 5 || // For tile length 6
         i === length - 7 || // For tile length 10
-        i === length - 8 // For tile length 9
+        i === length - 8 || // For tile length 9
+        length - i < tileLength
       ) {
         verticalMeshData.push(horizontalTileMesh(i, true));
       } else {
