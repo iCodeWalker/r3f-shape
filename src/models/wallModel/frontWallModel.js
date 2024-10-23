@@ -32,7 +32,7 @@ const FrontWallModel = ({
 
   // ################### Front Wall Extrude Setting  ###################
   const frontWallExtrudeSettings = {
-    depth: -wallLength, // floor length
+    depth: -wallLength - 1, // floor length
     bevelEnabled: false,
     bevelSegments: 0,
     steps: 1,
@@ -93,7 +93,7 @@ const FrontWallModel = ({
     <mesh
       position-z={0}
       position-y={0}
-      position-x={15 + 2}
+      position-x={-0.51}
       rotation={[0, -Math.PI / 2, 0]}
       ref={frontWallRef}
     >
@@ -105,7 +105,7 @@ const FrontWallModel = ({
         // map={wallTexture}
       />
       <Html
-        position={[-1, 7, 0]}
+        position={[1, 7, -10]}
         wrapperClass="label"
         center
         distanceFactor={20}
