@@ -1,3 +1,4 @@
+import { Html } from "@react-three/drei";
 import { Base, Geometry, Subtraction } from "@react-three/csg";
 import {
   PivotControls,
@@ -17,13 +18,15 @@ const FrontWallModel = ({
 }) => {
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
+  const frontWallRef = useRef();
+
   // ################### Front Wall Model ###################
   const frontWallModel = new THREE.Shape();
 
   frontWallModel.moveTo(0, 0);
   frontWallModel.lineTo(0, 11); // y-coordinate is height, x-coordinate is width of wall
-  frontWallModel.lineTo(0.2, 11); // y-coordinate is height, x-coordinate is width of wall
-  frontWallModel.lineTo(0.2, 0);
+  frontWallModel.lineTo(0.5, 11); // y-coordinate is height, x-coordinate is width of wall
+  frontWallModel.lineTo(0.5, 0);
   frontWallModel.lineTo(0, 0);
   frontWallModel.closePath();
 
@@ -49,42 +52,67 @@ const FrontWallModel = ({
   );
 
   return (
+    // <mesh
+    //   position-z={0.101}
+    //   position-y={11 / 2 + 0.102}
+    //   position-x={15 + 2}
+    //   rotation={[0, 0, 0]}
+    // >
+    //   {/* position-x={xCoordinateShift - 0.121} */}
+    //   {/* <extrudeGeometry args={[frontWallModel, frontWallExtrudeSettings]} /> */}
+
+    //   <Geometry ref={csg}>
+    //     <Base>
+    //       {/* <extrudeGeometry args={[frontWallModel, frontWallExtrudeSettings]} /> */}
+    //       <boxGeometry args={[30, 11, 0.2]} />
+    //     </Base>
+    //     {/* <PivotControls
+    //       activeAxes={[true, true, false]}
+    //       // rotation={[0, 0, 0]}
+    //       scale={10}
+    //       // anchor={[0, -2, 2]}
+    //       onDrag={() => csg.current.update()}
+    //       // visible={false}
+    //       position={[0, 0, 0]}
+    //       hoveredColor={"green"}
+    //       disableRotations={true}
+    //       disableAxes={true}
+    //       disableScaling={true}
+    //     > */}
+    //     <Window position={[-3, 0, 0]} scale={1} rotation={[0, 0, 0]} />
+    //     <TransformControls object={windowRef.current} mode="translate" />
+    //     {/* </PivotControls> */}
+    //   </Geometry>
+    //   <meshStandardMaterial
+    //     color={"blue"}
+    //     // side={THREE.DoubleSide}
+    //     // map={wallTexture}
+    //   />
+    // </mesh>
+
     <mesh
-      position-z={0.101}
-      position-y={11 / 2 + 0.102}
+      position-z={0}
+      position-y={0}
       position-x={15 + 2}
-      rotation={[0, 0, 0]}
+      rotation={[0, -Math.PI / 2, 0]}
+      ref={frontWallRef}
     >
       {/* position-x={xCoordinateShift - 0.121} */}
-      {/* <extrudeGeometry args={[frontWallModel, frontWallExtrudeSettings]} /> */}
-
-      <Geometry ref={csg}>
-        <Base>
-          {/* <extrudeGeometry args={[frontWallModel, frontWallExtrudeSettings]} /> */}
-          <boxGeometry args={[30, 11, 0.2]} />
-        </Base>
-        {/* <PivotControls
-          activeAxes={[true, true, false]}
-          // rotation={[0, 0, 0]}
-          scale={10}
-          // anchor={[0, -2, 2]}
-          onDrag={() => csg.current.update()}
-          // visible={false}
-          position={[0, 0, 0]}
-          hoveredColor={"green"}
-          disableRotations={true}
-          disableAxes={true}
-          disableScaling={true}
-        > */}
-        <Window position={[-3, 0, 0]} scale={1} rotation={[0, 0, 0]} />
-        <TransformControls object={windowRef.current} mode="translate" />
-        {/* </PivotControls> */}
-      </Geometry>
+      <extrudeGeometry args={[frontWallModel, frontWallExtrudeSettings]} />
       <meshStandardMaterial
-        color={"blue"}
-        // side={THREE.DoubleSide}
+        color={"red"}
+        side={THREE.DoubleSide}
         // map={wallTexture}
       />
+      <Html
+        position={[-1, 7, 0]}
+        wrapperClass="label"
+        center
+        distanceFactor={20}
+        occlude={[frontWallRef]}
+      >
+        Front Wall
+      </Html>
     </mesh>
   );
 };
