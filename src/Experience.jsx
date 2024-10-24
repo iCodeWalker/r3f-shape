@@ -11,6 +11,7 @@ import RightWallModel from "./models/wallModel/rightWallModel";
 import BackWallModel from "./models/wallModel/backWallModel";
 import FrontWallModel from "./models/wallModel/frontWallModel";
 import { AxesHelper } from "three";
+import CeilingModel from "./models/ceilingModel/ceilingModel";
 
 const doorModel = new THREE.Shape();
 
@@ -240,6 +241,13 @@ export default function Experience() {
         wallColor={buildingReducer.tileGapColor}
       />
       <BackWallModel
+        wallLength={buildingReducer.width + 0.202}
+        zCoordinateShiftBackWall={buildingReducer.length + 0.101}
+        xCoordinateShiftBackWall={buildingReducer.tileWidth}
+        // texture={buildingReducer.selectedTexture}
+        wallColor={buildingReducer.tileGapColor}
+      />
+      <CeilingModel
         wallLength={buildingReducer.width + 0.202}
         zCoordinateShiftBackWall={buildingReducer.length + 0.101}
         xCoordinateShiftBackWall={buildingReducer.tileWidth}
