@@ -74,11 +74,19 @@ const FloorModel = ({
   // ################### Floor Tile-Gap Model ###################
   const floorTileGapModel = new THREE.Shape();
   floorTileGapModel.moveTo(-0.01, 0);
-  floorTileGapModel.lineTo(-0.01, 0.251);
-  floorTileGapModel.lineTo(0.01, 0.251);
+  floorTileGapModel.lineTo(-0.01, 0.261);
+  floorTileGapModel.lineTo(0.01, 0.261);
   floorTileGapModel.lineTo(0.01, 0);
   floorTileGapModel.lineTo(-0.01, 0);
   floorTileGapModel.closePath();
+
+  const floorTileGapModel2 = new THREE.Shape();
+  floorTileGapModel2.moveTo(-0.01, 0);
+  floorTileGapModel2.lineTo(-0.01, 0.262);
+  floorTileGapModel2.lineTo(0.01, 0.262);
+  floorTileGapModel2.lineTo(0.01, 0);
+  floorTileGapModel2.lineTo(-0.01, 0);
+  floorTileGapModel2.closePath();
   // ################### Floor Tile-Gap Extrude Setting  ###################
   const floorTileGapExtrudeSettings = {
     depth: -length,
@@ -261,17 +269,17 @@ const FloorModel = ({
           (width % tileWidth === 0 &&
             lastCordinate - i === tileWidth) ? null : (
             <mesh
-              position-z={-0.001}
-              position-y={0.001}
+              position-z={-0.0012}
+              position-y={0.0012}
               position-x={i + tileWidth - 0.01}
             >
               {console.log(i, lastCordinate, width, "lastCordinate")}
               <extrudeGeometry
-                args={[floorTileGapModel, floorTileGapExtrudeSettings]}
+                args={[floorTileGapModel2, floorTileGapExtrudeSettings]}
               />
               <meshStandardMaterial
-                // color={"red"}
-                color={tileGapColor}
+                color={"red"}
+                // color={tileGapColor}
                 map={tileTexture}
                 side={THREE.DoubleSide}
               />

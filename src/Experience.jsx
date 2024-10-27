@@ -220,13 +220,13 @@ export default function Experience() {
         texture={buildingReducer.selectedTexture}
       />
 
-      <FrontWallModel
+      {/* <FrontWallModel
         wallLength={buildingReducer.width}
         zCoordinateShiftBackWall={buildingReducer.length}
         xCoordinateShiftFrontWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
-      />
+      /> */}
 
       <LeftWallModel
         wallLength={buildingReducer.length}
