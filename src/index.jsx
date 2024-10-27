@@ -21,8 +21,8 @@ root.render(
           shadows
           camera={{
             fov: 75,
-            near: 0.001,
-            // far: 100,
+            near: 0.01,
+            far: 500,
             position: [-5, 5, 5],
           }}
         >
