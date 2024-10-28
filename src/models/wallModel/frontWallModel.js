@@ -54,6 +54,7 @@ const FrontWallModel = ({
         frontWallRef.current.material.transparent = false;
         frontWallRef.current.material.opacity = 1;
       }
+      console.log(camera.position, "camera.position", frontWallRef.current);
     }
   });
 

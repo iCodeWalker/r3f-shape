@@ -16,6 +16,10 @@ const RightWallModel = ({
 
   const { camera } = useThree();
 
+  const buildingReducer = useSelector(
+    (state) => state.rootReducer.buildingReducer
+  );
+
   // ################### Right Wall Model ###################
   const rightWallModel = new THREE.Shape();
 
@@ -45,7 +49,8 @@ const RightWallModel = ({
       if (
         camera.position.x > 0 &&
         camera.position.z < 0 &&
-        camera.position.x > rightWallRef.current.position.x
+        camera.position.x > rightWallRef.current.position.x &&
+        camera.position.x > buildingReducer.width
       ) {
         rightWallRef.current.material.opacity = 0.2;
         rightWallRef.current.material.transparent = true;

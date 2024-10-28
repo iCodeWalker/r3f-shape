@@ -1,6 +1,7 @@
 import { Html } from "@react-three/drei";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import * as THREE from "three";
 
 const BackWallModel = ({
@@ -13,6 +14,10 @@ const BackWallModel = ({
   const { camera } = useThree();
 
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
+
+  const buildingReducer = useSelector(
+    (state) => state.rootReducer.buildingReducer
+  );
 
   // ################### Back Wall Model ###################
   const backWallModel = new THREE.Shape();
@@ -41,7 +46,8 @@ const BackWallModel = ({
       if (
         camera.position.x > 0 &&
         camera.position.z < 0 &&
-        camera.position.z < backWallRef.current.position.z
+        camera.position.z < backWallRef.current.position.z &&
+        camera.position.z < buildingReducer.length
       ) {
         backWallRef.current.material.opacity = 0.2;
         backWallRef.current.material.transparent = true;
