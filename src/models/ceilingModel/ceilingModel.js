@@ -35,7 +35,7 @@ const CeilingModel = ({
 
   const calcExtrudeSettingForCeil = () => {
     return {
-      depth: -buildingReducer.length - 0.5, // floor length
+      depth: -buildingReducer.length - 1, // floor length
       bevelEnabled: false,
       bevelSegments: 0,
       steps: 1,
@@ -51,7 +51,7 @@ const CeilingModel = ({
   console.log(wallLength, "wallLength");
   return (
     <mesh
-      position-z={0}
+      position-z={0.5}
       position-y={11.5}
       position-x={-0.5}
       rotation={[0, 0, -Math.PI / 2]}
@@ -71,7 +71,7 @@ const CeilingModel = ({
         distanceFactor={20}
         occlude={[ceilingRef]}
       >
-        Back Wall
+        Ceiling
       </Html>
     </mesh>
   );
