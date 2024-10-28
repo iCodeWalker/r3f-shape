@@ -283,8 +283,8 @@ const FloorModel = ({
                 map={tileTexture}
                 side={THREE.DoubleSide}
                 polygonOffset={true}
-                polygonOffsetFactor={-0.3} // Negative values push the mesh back
-                polygonOffsetUnits={-0.3}
+                polygonOffsetFactor={-0.1} // Negative values push the mesh back
+                polygonOffsetUnits={-0.1}
               />
             </mesh>
           )}
