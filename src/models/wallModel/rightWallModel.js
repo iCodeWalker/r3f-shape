@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import * as THREE from "three";
@@ -13,6 +13,8 @@ const RightWallModel = ({
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
   const rightWallRef = useRef();
+
+  const { camera } = useThree();
 
   // ################### Right Wall Model ###################
   const rightWallModel = new THREE.Shape();
@@ -37,6 +39,23 @@ const RightWallModel = ({
     bevelSize: 0.1,
     bevelThickness: 1,
   };
+
+  useFrame(() => {
+    if (rightWallRef.current) {
+      if (
+        camera.position.x > 0 &&
+        camera.position.z < 0 &&
+        camera.position.x > rightWallRef.current.position.x
+      ) {
+        rightWallRef.current.material.opacity = 0.2;
+        rightWallRef.current.material.transparent = true;
+      } else {
+        rightWallRef.current.material.transparent = false;
+        rightWallRef.current.material.opacity = 1;
+      }
+    }
+  });
+
   return (
     <mesh
       position-z={0}

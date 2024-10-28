@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -9,9 +9,22 @@ const LeftWallModel = ({
   // wallTexture,
   wallColor,
 }) => {
+  const { camera } = useThree();
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
   const leftWallRef = useRef();
+
+  useFrame(() => {
+    if (leftWallRef.current) {
+      if (camera.position.x < 0 && camera.position.z < 0) {
+        leftWallRef.current.material.opacity = 0.2;
+        leftWallRef.current.material.transparent = true;
+      } else {
+        leftWallRef.current.material.transparent = false;
+        leftWallRef.current.material.opacity = 1;
+      }
+    }
+  });
 
   // ################### Left Wall Model ###################
   const leftWallModel = new THREE.Shape();

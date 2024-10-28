@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -10,6 +10,8 @@ const BackWallModel = ({
   //   wallTexture,
   wallColor,
 }) => {
+  const { camera } = useThree();
+
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
   // ################### Back Wall Model ###################
@@ -33,6 +35,22 @@ const BackWallModel = ({
     bevelSize: 0.1,
     bevelThickness: 1,
   };
+
+  useFrame(() => {
+    if (backWallRef.current) {
+      if (
+        camera.position.x > 0 &&
+        camera.position.z < 0 &&
+        camera.position.z < backWallRef.current.position.z
+      ) {
+        backWallRef.current.material.opacity = 0.2;
+        backWallRef.current.material.transparent = true;
+      } else {
+        backWallRef.current.material.transparent = false;
+        backWallRef.current.material.opacity = 1;
+      }
+    }
+  });
   return (
     <mesh
       position-z={-zCoordinateShiftBackWall - 0.4}

@@ -1,4 +1,5 @@
 import { Html } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Base, Geometry, Subtraction } from "@react-three/csg";
 import {
   PivotControls,
@@ -42,6 +43,19 @@ const FrontWallModel = ({
 
   const csg = useRef();
   const windowRef = useRef();
+  const { camera } = useThree();
+
+  useFrame(() => {
+    if (frontWallRef.current) {
+      if (camera.position.x > 0 && camera.position.z > 0) {
+        frontWallRef.current.material.opacity = 0.2;
+        frontWallRef.current.material.transparent = true;
+      } else {
+        frontWallRef.current.material.transparent = false;
+        frontWallRef.current.material.opacity = 1;
+      }
+    }
+  });
 
   const Window = (props) => (
     <Subtraction {...props}>
@@ -102,6 +116,8 @@ const FrontWallModel = ({
       <meshStandardMaterial
         color={"red"}
         side={THREE.DoubleSide}
+        // transparent={true}
+        // opacity={0.15}
         // map={wallTexture}
       />
       <Html
