@@ -6,6 +6,7 @@ import {
 export const buildingData = {
   width: "",
   length: "",
+  height: "",
   tileLength: "",
   tileWidth: "",
   tileGapColor: "",
@@ -29,6 +30,7 @@ export const buildingData = {
       { label: "70", value: "70" },
     ],
     floorTextures: [],
+    selectedFloorTexture: "",
   },
   tileData: {
     widthOptions: [
@@ -53,18 +55,34 @@ export const buildingData = {
     ],
     gapColorOptions: [],
     tileTextures: ["tile.jpg", "wood.jpg", "darkwood.jpg"],
-    selectedTexture: "tile.jpg",
+    selectedTileTexture: "tile.jpg",
+  },
+  wallData: {
+    wallTextures: [],
+    selectedWallTexture: {
+      front: "",
+      back: "",
+      left: "",
+      right: "",
+    },
   },
 };
 
 const initialState = {
   width: 30,
   length: 30,
+  height: 11,
   tileLength: 2,
   tileWidth: 2,
   tileGapColor: "#f1f39c",
   texture: "tile.jpg",
-  selectedTexture: "tile.jpg",
+  selectedTileTexture: "tile.jpg",
+  selectedWallTexture: {
+    front: "",
+    back: "",
+    left: "",
+    right: "",
+  },
 };
 
 const buildingReducer = (state = initialState, action) => {
