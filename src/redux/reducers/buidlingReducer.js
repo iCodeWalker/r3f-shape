@@ -1,6 +1,7 @@
 import {
   HANDLE_DIMENSION_CHANGE,
   HANDLE_TILE_ATTRIBUTE_CHANGE,
+  HANDLE_WALL_ATTRIBUTE_CHANGE,
 } from "../actions/actionTypes.js";
 
 export const buildingData = {
@@ -59,6 +60,7 @@ export const buildingData = {
   },
   wallData: {
     wallTextures: [],
+    isAllWallHidden: false,
     selectedWallTexture: {
       front: "",
       back: "",
@@ -83,6 +85,7 @@ const initialState = {
     left: "",
     right: "",
   },
+  isAllWallHidden: false,
 };
 
 const buildingReducer = (state = initialState, action) => {
@@ -110,6 +113,11 @@ const buildingReducer = (state = initialState, action) => {
         buildingData.tileWidth = parseFloat(action.value);
         state = { ...state, tileWidth: parseFloat(action.value) };
       }
+      // ####### Tile Width #######
+      if (action.key === "height") {
+        buildingData.height = parseFloat(action.value);
+        state = { ...state, height: parseFloat(action.value) };
+      }
       return { ...state };
 
     // ############# 1. Handling tile attribute changes ################
@@ -126,11 +134,27 @@ const buildingReducer = (state = initialState, action) => {
         }
       }
       // ####### Tile Texture #######
-      if (action.key === "selectedTexture") {
-        buildingData.selectedTexture = action.value;
-        state = { ...state, selectedTexture: action.value };
+      if (action.key === "selectedTileTexture") {
+        buildingData.selectedTileTexture = action.value;
+        state = { ...state, selectedTileTexture: action.value };
       }
       return { ...state };
+
+    // ############# 2. Handling wall attribute changes ################
+
+    case HANDLE_WALL_ATTRIBUTE_CHANGE:
+      // ####### Wall Texture #######
+      if (action.key === "selectedWallTexture") {
+        buildingData.selectedWallTexture = action.value;
+        state = { ...state, selectedWallTexture: action.value };
+      }
+
+      // ####### Hide All Walls #######
+      if (action.key === "hideAllWalls") {
+        console.log(action.value, "isAllWallHidden");
+        buildingData.isAllWallHidden = action.value;
+        state = { ...state, isAllWallHidden: action.value };
+      }
 
     default:
       return state;

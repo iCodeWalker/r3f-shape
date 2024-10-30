@@ -10,6 +10,7 @@ import { useLoader } from "@react-three/fiber";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
+import { useSelector } from "react-redux";
 
 const FrontWallModel = ({
   wallLength,
@@ -20,6 +21,10 @@ const FrontWallModel = ({
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
   const frontWallRef = useRef();
+
+  const buildingReducer = useSelector(
+    (state) => state.rootReducer.buildingReducer
+  );
 
   // ################### Front Wall Model ###################
   const frontWallModel = new THREE.Shape();
@@ -45,18 +50,31 @@ const FrontWallModel = ({
   const windowRef = useRef();
   const { camera } = useThree();
 
+  if (buildingReducer.isAllWallHidden) {
+  }
   useFrame(() => {
-    if (frontWallRef.current) {
-      if (camera.position.x > 0 && camera.position.z > 0) {
-        frontWallRef.current.material.opacity = 0.2;
-        frontWallRef.current.material.transparent = true;
-      } else {
-        frontWallRef.current.material.transparent = false;
-        frontWallRef.current.material.opacity = 1;
+    if (!buildingReducer.isAllWallHidden) {
+      if (frontWallRef.current) {
+        if (camera.position.x > 0 && camera.position.z > 0) {
+          frontWallRef.current.material.opacity = 0.2;
+          frontWallRef.current.material.transparent = true;
+        } else {
+          frontWallRef.current.material.transparent = false;
+          frontWallRef.current.material.opacity = 1;
+        }
       }
-      console.log(camera.position, "camera.position", frontWallRef.current);
     }
   });
+
+  useEffect(() => {
+    if (buildingReducer.isAllWallHidden) {
+      frontWallRef.current.material.opacity = 0;
+      frontWallRef.current.material.transparent = true;
+    } else {
+      frontWallRef.current.material.transparent = false;
+      frontWallRef.current.material.opacity = 1;
+    }
+  }, [buildingReducer.isAllWallHidden]);
 
   const Window = (props) => (
     <Subtraction {...props}>

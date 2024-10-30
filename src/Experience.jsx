@@ -217,7 +217,7 @@ export default function Experience() {
         tileLength={buildingReducer.tileLength}
         tileWidth={buildingReducer.tileWidth}
         gapColor={buildingReducer.tileGapColor}
-        texture={buildingReducer.selectedTexture}
+        texture={buildingReducer.selectedTileTexture}
       />
 
       <FrontWallModel

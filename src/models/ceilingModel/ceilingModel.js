@@ -14,6 +14,7 @@ const CeilingModel = ({
   const wallTexture = useLoader(THREE.TextureLoader, "wood.jpg");
 
   const [ceilExtrude, setCeilExtrude] = useState({});
+  const [isCeilingVisible, setIsCeilingVisible] = useState(true);
 
   const buildingReducer = useSelector(
     (state) => state.rootReducer.buildingReducer
@@ -46,7 +47,20 @@ const CeilingModel = ({
 
   useEffect(() => {
     setCeilExtrude(calcExtrudeSettingForCeil());
-  }, [buildingReducer.length]);
+    setIsCeilingVisible(buildingReducer.isAllWallHidden);
+  }, [buildingReducer.length, buildingReducer.isAllWallHidden]);
+
+  useEffect(() => {
+    if (ceilingRef.current) {
+      if (buildingReducer.isAllWallHidden) {
+        ceilingRef.current.material.opacity = 0;
+        ceilingRef.current.material.transparent = true;
+      } else {
+        ceilingRef.current.material.transparent = false;
+        ceilingRef.current.material.opacity = 1;
+      }
+    }
+  }, [buildingReducer.isAllWallHidden]);
 
   console.log(wallLength, "wallLength");
   return (

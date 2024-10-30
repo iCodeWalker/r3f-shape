@@ -34,7 +34,6 @@ const FloorModel = ({
 
   // ################### Floor Tile Model : last tile model function ###################
   const floorLastTileModel = (x) => {
-    console.log(x, "floorLastTileModel");
     const floorLastTileModel = new THREE.Shape();
     floorLastTileModel.moveTo(0 - 0.01, 0); // Start point
     floorLastTileModel.lineTo(0 - 0.01, 0.25); // Top left
@@ -140,14 +139,11 @@ const FloorModel = ({
     }
   }
 
-  console.log(horizontalTileGapData, "datadata----after");
-
   let floorTileStartingCoordinates = [];
   for (let i = 0; i <= width; i++) {
     if (i % tileWidth !== 0) {
       continue;
     }
-    console.log(i, "floorTileStartingCoordinates");
     floorTileStartingCoordinates.push(i);
   }
 
@@ -162,8 +158,6 @@ const FloorModel = ({
 
       let lastCordinate =
         floorTileStartingCoordinates[floorTileStartingCoordinates.length - 1];
-
-      console.log(lastCordinate, "horizontalTileMesh");
 
       horizontalMeshData.push(
         <group>
