@@ -45,21 +45,33 @@ const RightWallModel = ({
   };
 
   useFrame(() => {
-    if (rightWallRef.current) {
-      if (
-        camera.position.x > 0 &&
-        camera.position.z < 0 &&
-        camera.position.x > rightWallRef.current.position.x &&
-        camera.position.x > buildingReducer.width
-      ) {
-        rightWallRef.current.material.opacity = 0.2;
-        rightWallRef.current.material.transparent = true;
-      } else {
-        rightWallRef.current.material.transparent = false;
-        rightWallRef.current.material.opacity = 1;
+    if (!buildingReducer.isAllWallHidden) {
+      if (rightWallRef.current) {
+        if (
+          camera.position.x > 0 &&
+          camera.position.z < 0 &&
+          camera.position.x > rightWallRef.current.position.x &&
+          camera.position.x > buildingReducer.width
+        ) {
+          rightWallRef.current.material.opacity = 0.2;
+          rightWallRef.current.material.transparent = true;
+        } else {
+          rightWallRef.current.material.transparent = false;
+          rightWallRef.current.material.opacity = 1;
+        }
       }
     }
   });
+
+  useEffect(() => {
+    if (buildingReducer.isAllWallHidden) {
+      rightWallRef.current.material.opacity = 0;
+      rightWallRef.current.material.transparent = true;
+    } else {
+      rightWallRef.current.material.transparent = false;
+      rightWallRef.current.material.opacity = 1;
+    }
+  }, [buildingReducer.isAllWallHidden]);
 
   return (
     <mesh

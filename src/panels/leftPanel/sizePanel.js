@@ -56,6 +56,7 @@ const SizePanel = () => {
         onChange={(e) =>
           dispatch(handleWallAttributeChange("hideAllWalls", e.target.checked))
         }
+        style={{ height: "20px", width: "20px" }}
       />
       <p>Hide All Walls</p>
 

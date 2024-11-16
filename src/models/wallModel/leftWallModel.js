@@ -1,6 +1,7 @@
 import { Html } from "@react-three/drei";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import * as THREE from "three";
 
 const LeftWallModel = ({
@@ -14,17 +15,33 @@ const LeftWallModel = ({
 
   const leftWallRef = useRef();
 
+  const buildingReducer = useSelector(
+    (state) => state.rootReducer.buildingReducer
+  );
+
   useFrame(() => {
-    if (leftWallRef.current) {
-      if (camera.position.x < 0 && camera.position.z < 0) {
-        leftWallRef.current.material.opacity = 0.2;
-        leftWallRef.current.material.transparent = true;
-      } else {
-        leftWallRef.current.material.transparent = false;
-        leftWallRef.current.material.opacity = 1;
+    if (!buildingReducer.isAllWallHidden) {
+      if (leftWallRef.current) {
+        if (camera.position.x < 0 && camera.position.z < 0) {
+          leftWallRef.current.material.opacity = 0.2;
+          leftWallRef.current.material.transparent = true;
+        } else {
+          leftWallRef.current.material.transparent = false;
+          leftWallRef.current.material.opacity = 1;
+        }
       }
     }
   });
+
+  useEffect(() => {
+    if (buildingReducer.isAllWallHidden) {
+      leftWallRef.current.material.opacity = 0;
+      leftWallRef.current.material.transparent = true;
+    } else {
+      leftWallRef.current.material.transparent = false;
+      leftWallRef.current.material.opacity = 1;
+    }
+  }, [buildingReducer.isAllWallHidden]);
 
   // ################### Left Wall Model ###################
   const leftWallModel = new THREE.Shape();

@@ -50,8 +50,6 @@ const FrontWallModel = ({
   const windowRef = useRef();
   const { camera } = useThree();
 
-  if (buildingReducer.isAllWallHidden) {
-  }
   useFrame(() => {
     if (!buildingReducer.isAllWallHidden) {
       if (frontWallRef.current) {

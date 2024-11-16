@@ -42,21 +42,34 @@ const BackWallModel = ({
   };
 
   useFrame(() => {
-    if (backWallRef.current) {
-      if (
-        camera.position.x > 0 &&
-        camera.position.z < 0 &&
-        camera.position.z < backWallRef.current.position.z &&
-        camera.position.z < buildingReducer.length
-      ) {
-        backWallRef.current.material.opacity = 0.2;
-        backWallRef.current.material.transparent = true;
-      } else {
-        backWallRef.current.material.transparent = false;
-        backWallRef.current.material.opacity = 1;
+    if (!buildingReducer.isAllWallHidden) {
+      if (backWallRef.current) {
+        if (
+          camera.position.x > 0 &&
+          camera.position.z < 0 &&
+          camera.position.z < backWallRef.current.position.z &&
+          camera.position.z < buildingReducer.length
+        ) {
+          backWallRef.current.material.opacity = 0.2;
+          backWallRef.current.material.transparent = true;
+        } else {
+          backWallRef.current.material.transparent = false;
+          backWallRef.current.material.opacity = 1;
+        }
       }
     }
   });
+
+  useEffect(() => {
+    if (buildingReducer.isAllWallHidden) {
+      backWallRef.current.material.opacity = 0;
+      backWallRef.current.material.transparent = true;
+    } else {
+      backWallRef.current.material.transparent = false;
+      backWallRef.current.material.opacity = 1;
+    }
+  }, [buildingReducer.isAllWallHidden]);
+
   return (
     <mesh
       position-z={-zCoordinateShiftBackWall - 0.4}
