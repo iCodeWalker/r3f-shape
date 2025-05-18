@@ -197,10 +197,10 @@ export default function Experience() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <OrbitControls makeDefault target={[15, 8, 0]} />
-      <directionalLight castShadow position={[6, 4, 1]} intensity={1.5} />
+      <OrbitControls makeDefault target={[15, 0, -15]} />
+      <directionalLight castShadow position={[6, 4, 1]} intensity={2.5} />
       <ambientLight intensity={0.5} />
-      <axesHelper args={[20]} />
+      {/* <axesHelper args={[20]} /> */}
       {/* <mesh castShadow position={[-2, 2, 0]}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />

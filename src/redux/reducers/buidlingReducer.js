@@ -60,7 +60,7 @@ export const buildingData = {
   },
   wallData: {
     wallTextures: [],
-    isAllWallHidden: false,
+    isAllWallHidden: true,
     selectedWallTexture: {
       front: "",
       back: "",
@@ -85,7 +85,7 @@ const initialState = {
     left: "",
     right: "",
   },
-  isAllWallHidden: false,
+  isAllWallHidden: true,
 };
 
 const buildingReducer = (state = initialState, action) => {
