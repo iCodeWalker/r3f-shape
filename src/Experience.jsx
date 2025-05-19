@@ -12,6 +12,8 @@ import BackWallModel from "./models/wallModel/backWallModel";
 import FrontWallModel from "./models/wallModel/frontWallModel";
 import { AxesHelper } from "three";
 import CeilingModel from "./models/ceilingModel/ceilingModel";
+import BedModel from "./models/bedModel/bedModel";
+import LegModel from "./models/legModel/legModel";
 
 const doorModel = new THREE.Shape();
 
@@ -253,6 +255,39 @@ export default function Experience() {
         xCoordinateShiftBackWall={buildingReducer.tileWidth}
         // texture={buildingReducer.selectedTexture}
         wallColor={buildingReducer.tileGapColor}
+      />
+      <BedModel
+        width={4}
+        length={7}
+        height={3}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
+      <LegModel
+        xPosition={5}
+        zPosition={-5}
+        color={"orange"}
+        texture={buildingReducer.selectedTileTexture}
+      />
+      <LegModel
+        xPosition={8.8}
+        zPosition={-5}
+        color={"orange"}
+        texture={buildingReducer.selectedTileTexture}
+      />
+      <LegModel
+        xPosition={5}
+        zPosition={-11.8}
+        color={"orange"}
+        texture={buildingReducer.selectedTileTexture}
+      />
+      <LegModel
+        xPosition={8.8}
+        zPosition={-11.8}
+        color={"orange"}
+        texture={buildingReducer.selectedTileTexture}
       />
     </>
   );

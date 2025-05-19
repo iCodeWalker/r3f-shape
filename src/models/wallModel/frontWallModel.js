@@ -137,7 +137,7 @@ const FrontWallModel = ({
         // opacity={0.15}
         // map={wallTexture}
       />
-      <Html
+      {/* <Html
         position={[1, 7, -10]}
         wrapperClass="label"
         center
@@ -145,7 +145,7 @@ const FrontWallModel = ({
         occlude={[frontWallRef]}
       >
         Front Wall
-      </Html>
+      </Html> */}
     </mesh>
   );
 };

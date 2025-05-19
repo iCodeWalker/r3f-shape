@@ -78,7 +78,7 @@ const CeilingModel = ({
         side={THREE.DoubleSide}
         // map={wallTexture}
       />
-      <Html
+      {/* <Html
         position={[-1, 7, -zCoordinateShiftBackWall / 2]}
         wrapperClass="label"
         center
@@ -86,7 +86,7 @@ const CeilingModel = ({
         occlude={[ceilingRef]}
       >
         Ceiling
-      </Html>
+      </Html> */}
     </mesh>
   );
 };

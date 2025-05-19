@@ -79,6 +79,7 @@ const initialState = {
   tileGapColor: "#f1f39c",
   texture: "tile.jpg",
   selectedTileTexture: "tile.jpg",
+  selectedTableTExture: "table_texture.jpg",
   selectedWallTexture: {
     front: "",
     back: "",
