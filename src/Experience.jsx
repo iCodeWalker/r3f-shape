@@ -14,6 +14,10 @@ import { AxesHelper } from "three";
 import CeilingModel from "./models/ceilingModel/ceilingModel";
 import BedModel from "./models/bedModel/bedModel";
 import LegModel from "./models/legModel/legModel";
+import BedCoverModel from "./models/bedCoverModel/bedCoverModel";
+import SideCoverModel from "./models/bedCoverModel/sideCoverModel";
+import BackCoverModel from "./models/bedCoverModel/backCoverModel";
+import FrontCoverModel from "./models/bedCoverModel/frontCoverModel";
 
 const doorModel = new THREE.Shape();
 
@@ -201,6 +205,10 @@ export default function Experience() {
       {/* <Perf position="top-left" /> */}
       <OrbitControls makeDefault target={[15, 0, -15]} />
       <directionalLight castShadow position={[6, 4, 1]} intensity={2.5} />
+      <directionalLight castShadow position={[-6, 4, 1]} intensity={2.5} />
+      <directionalLight castShadow position={[6, 4, 10]} intensity={2.5} />
+      <directionalLight castShadow position={[-6, 4, -10]} intensity={2.5} />
+
       <ambientLight intensity={0.5} />
       {/* <axesHelper args={[20]} /> */}
       {/* <mesh castShadow position={[-2, 2, 0]}>
@@ -259,6 +267,54 @@ export default function Experience() {
       <BedModel
         width={4}
         length={7}
+        height={3}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
+      <BedCoverModel
+        width={3}
+        length={7}
+        height={3}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
+
+      <BedCoverModel
+        width={3}
+        length={7}
+        height={3}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
+      <SideCoverModel
+        width={3}
+        length={7}
+        height={3}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
+
+      <BackCoverModel
+        width={3}
+        length={3}
+        height={3}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
+
+      <FrontCoverModel
+        width={3}
+        length={3}
         height={3}
         texture={buildingReducer.selectedTableTExture}
         wallLength={5}

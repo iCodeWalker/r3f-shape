@@ -4,22 +4,25 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import * as THREE from "three";
 
-const LegModel = ({
-  xPosition,
-  zPosition,
-  color,
+const BedCoverModel = ({
+  length, // In feet
+  width, // In feet
+  height, // In feet
   texture,
+  wallLength,
   zCoordinateShiftBackWall,
   xCoordinateShiftBackWall,
   //   wallTexture,
   wallColor,
 }) => {
-  const legTexture = useLoader(THREE.TextureLoader, "wood.jpg");
-  // ################### Repeating Tile Texture ###################
-  legTexture.wrapS = THREE.RepeatWrapping;
-  legTexture.wrapT = THREE.RepeatWrapping;
+  const bedTexture = useLoader(THREE.TextureLoader, texture);
 
-  const [legExtrude, setCeilExtrude] = useState({});
+  // ################### Repeating Tile Texture ###################
+  bedTexture.wrapS = THREE.RepeatWrapping;
+  bedTexture.wrapT = THREE.RepeatWrapping;
+  bedTexture.repeat.set(0.1, 0.5);
+
+  const [bedExtrude, setCeilExtrude] = useState({});
   const [isCeilingVisible, setIsCeilingVisible] = useState(true);
 
   const buildingReducer = useSelector(
@@ -27,16 +30,16 @@ const LegModel = ({
   );
 
   // ################### Back Wall Model ###################
-  const legModel = new THREE.Shape();
+  const bedModel = new THREE.Shape();
 
-  const legRef = useRef();
+  const bedRef = useRef();
 
-  legModel.moveTo(0, 0);
-  legModel.lineTo(0, -3); // y-coordinate is height, x-coordinate is width of wall
-  legModel.lineTo(0.2, -3); // y-coordinate is height, x-coordinate is width of wall
-  legModel.lineTo(0.2, 0);
-  legModel.lineTo(0, 0);
-  legModel.closePath();
+  bedModel.moveTo(0, 0);
+  bedModel.lineTo(0, 3 - 0.2); // y-coordinate is width of bed, x-coordinate is "How much the bed has wood"
+  bedModel.lineTo(0.15, 3 - 0.2); // y-coordinate is width of bed, x-coordinate is "How much the bed has wood"
+  bedModel.lineTo(0.15, 0);
+  bedModel.lineTo(0, 0);
+  bedModel.closePath();
 
   const bedLegRef = useRef();
 
@@ -44,7 +47,7 @@ const LegModel = ({
 
   const calcExtrudeSettingForCeil = () => {
     return {
-      depth: -0.2, // floor length
+      depth: -length, // length of bed in feet
       bevelEnabled: false,
       bevelSegments: 0,
       steps: 1,
@@ -59,39 +62,39 @@ const LegModel = ({
   }, [buildingReducer.length, buildingReducer.isAllWallHidden]);
 
   useEffect(() => {
-    if (legRef.current) {
+    if (bedRef.current) {
       if (buildingReducer.isAllWallHidden) {
-        legRef.current.material.opacity = 1;
-        legRef.current.material.transparent = false;
+        bedRef.current.material.opacity = 1;
+        bedRef.current.material.transparent = false;
       } else {
-        legRef.current.material.transparent = false;
-        legRef.current.material.opacity = 1;
+        bedRef.current.material.transparent = false;
+        bedRef.current.material.opacity = 1;
       }
     }
   }, [buildingReducer.isAllWallHidden]);
 
-  console.log(xPosition, "xPosition");
+  console.log(wallLength, "wallLength");
   return (
     <mesh
-      position-z={zPosition}
-      position-y={3 + 0.3}
-      position-x={xPosition}
+      position-z={-11.5}
+      position-y={0.3} // Height in feet
+      position-x={13.35}
       rotation={[0, 0, 0]}
-      ref={legRef}
+      ref={bedRef}
     >
       {/* position-x={xCoordinateShift - 0.121} */}
-      <extrudeGeometry args={[legModel, legExtrude]} />
+      <extrudeGeometry args={[bedModel, bedExtrude]} />
       <meshStandardMaterial
-        color={color}
+        // color={"orange"}
         side={THREE.DoubleSide}
-        map={legTexture}
+        map={bedTexture}
       />
       {/* <Html
         position={[-1, 7, -zCoordinateShiftBackWall / 2]}
         wrapperClass="label"
         center
         distanceFactor={20}
-        occlude={[legRef]}
+        occlude={[bedRef]}
       >
         Ceiling
       </Html> */}
@@ -99,4 +102,4 @@ const LegModel = ({
   );
 };
 
-export default LegModel;
+export default BedCoverModel;

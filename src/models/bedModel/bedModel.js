@@ -76,9 +76,9 @@ const BedModel = ({
   console.log(wallLength, "wallLength");
   return (
     <mesh
-      position-z={-5}
+      position-z={-11.5}
       position-y={height} // Height in feet
-      position-x={5}
+      position-x={13.5}
       rotation={[0, 0, -Math.PI / 2]}
       ref={bedRef}
     >
