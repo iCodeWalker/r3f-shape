@@ -18,6 +18,9 @@ import BedCoverModel from "./models/bedCoverModel/bedCoverModel";
 import SideCoverModel from "./models/bedCoverModel/sideCoverModel";
 import BackCoverModel from "./models/bedCoverModel/backCoverModel";
 import FrontCoverModel from "./models/bedCoverModel/frontCoverModel";
+import CurvatureBedModel from "./models/curvatureBedModel/curvatureBedModel";
+import BackSupportModel from "./models/backSupport/backSupport";
+import AngleBackSupportModel from "./models/angleBackSupport/angleBackSupport";
 
 const doorModel = new THREE.Shape();
 
@@ -203,7 +206,12 @@ export default function Experience() {
   return (
     <>
       {/* <Perf position="top-left" /> */}
-      <OrbitControls makeDefault target={[15, 0, -15]} />
+      <OrbitControls
+        makeDefault
+        minDistance={10}
+        maxDistance={60}
+        target={[15, 0, -15]}
+      />
       <directionalLight castShadow position={[6, 4, 1]} intensity={2.5} />
       <directionalLight castShadow position={[-6, 4, 1]} intensity={2.5} />
       <directionalLight castShadow position={[6, 4, 10]} intensity={2.5} />
@@ -270,6 +278,8 @@ export default function Experience() {
         height={3}
         texture={buildingReducer.selectedTableTExture}
         wallLength={5}
+        xposition={13.5}
+        zposition={-11.5}
         // zCoordinateShiftBackWall={-5 + 0.101}
         // xCoordinateShiftBackWall={buildingReducer.tileWidth}
       />
@@ -321,29 +331,71 @@ export default function Experience() {
         // zCoordinateShiftBackWall={-5 + 0.101}
         // xCoordinateShiftBackWall={buildingReducer.tileWidth}
       />
+
+      <BedModel
+        width={4}
+        length={7}
+        height={2}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        xposition={4}
+        zposition={-4}
+        // zCoordinateShiftBackWall={-5 + 0.101}
+        // xCoordinateShiftBackWall={buildingReducer.tileWidth}
+      />
       <LegModel
-        xPosition={5}
-        zPosition={-5}
+        xPosition={4}
+        zPosition={-4}
         color={"orange"}
         texture={buildingReducer.selectedTileTexture}
       />
       <LegModel
-        xPosition={8.8}
-        zPosition={-5}
+        xPosition={8 - 0.2}
+        zPosition={-4}
         color={"orange"}
         texture={buildingReducer.selectedTileTexture}
       />
       <LegModel
-        xPosition={5}
-        zPosition={-11.8}
+        xPosition={4}
+        zPosition={-11 + 0.2}
         color={"orange"}
         texture={buildingReducer.selectedTileTexture}
       />
       <LegModel
-        xPosition={8.8}
-        zPosition={-11.8}
+        xPosition={8 - 0.2}
+        zPosition={-11 + 0.2}
         color={"orange"}
         texture={buildingReducer.selectedTileTexture}
+      />
+
+      <CurvatureBedModel
+        width={3}
+        length={7}
+        height={2}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        xposition={4}
+        zposition={-15}
+      />
+
+      <BackSupportModel
+        width={3}
+        length={7}
+        height={2}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        xposition={13.35}
+        zposition={-15}
+      />
+
+      <AngleBackSupportModel
+        width={3}
+        length={7}
+        height={2}
+        texture={buildingReducer.selectedTableTExture}
+        wallLength={5}
+        xposition={17.65}
+        zposition={-15}
       />
     </>
   );

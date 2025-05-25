@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import * as THREE from "three";
 
-const BedModel = ({
+const CurvatureBedModel = ({
   length, // In feet
   width, // In feet
   height, // In feet
@@ -38,7 +38,11 @@ const BedModel = ({
 
   bedModel.moveTo(0, 0);
   bedModel.lineTo(0, width); // y-coordinate is width of bed, x-coordinate is "How much the bed has wood"
-  bedModel.lineTo(0.3, width); // y-coordinate is width of bed, x-coordinate is "How much the bed has wood"
+  bedModel.lineTo(4, width); // y-coordinate is width of bed, x-coordinate is "How much the bed has wood"
+  bedModel.lineTo(4, 0);
+  bedModel.lineTo(3.7, 0);
+  bedModel.lineTo(3.7, 0.4);
+  bedModel.lineTo(0.3, 0.4);
   bedModel.lineTo(0.3, 0);
   bedModel.lineTo(0, 0);
   bedModel.closePath();
@@ -49,7 +53,7 @@ const BedModel = ({
 
   const calcExtrudeSettingForCeil = () => {
     return {
-      depth: -length, // length of bed in feet
+      depth: -0.3, // length of bed in feet
       bevelEnabled: false,
       bevelSegments: 0,
       steps: 1,
@@ -78,10 +82,10 @@ const BedModel = ({
   console.log(wallLength, "wallLength");
   return (
     <mesh
-      position-z={zposition}
-      position-y={height} // Height in feet
+      position-z={-20}
+      position-y={0.3} // Height in feet
       position-x={xposition}
-      rotation={[0, 0, -Math.PI / 2]}
+      rotation={[0, 0, 0]}
       ref={bedRef}
     >
       {/* position-x={xCoordinateShift - 0.121} */}
@@ -104,4 +108,4 @@ const BedModel = ({
   );
 };
 
-export default BedModel;
+export default CurvatureBedModel;

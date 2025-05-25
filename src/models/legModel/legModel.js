@@ -32,8 +32,8 @@ const LegModel = ({
   const legRef = useRef();
 
   legModel.moveTo(0, 0);
-  legModel.lineTo(0, -3); // y-coordinate is height, x-coordinate is width of wall
-  legModel.lineTo(0.2, -3); // y-coordinate is height, x-coordinate is width of wall
+  legModel.lineTo(0, -2 + 0.31); // y-coordinate is height, x-coordinate is width of wall
+  legModel.lineTo(0.2, -2 + 0.31); // y-coordinate is height, x-coordinate is width of wall
   legModel.lineTo(0.2, 0);
   legModel.lineTo(0, 0);
   legModel.closePath();
@@ -74,7 +74,7 @@ const LegModel = ({
   return (
     <mesh
       position-z={zPosition}
-      position-y={3 + 0.3}
+      position-y={2 - 0.3}
       position-x={xPosition}
       rotation={[0, 0, 0]}
       ref={legRef}
